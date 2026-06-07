@@ -150,7 +150,7 @@ export default function Admin() {
 
         <div className="flex flex-wrap gap-2 mb-10">
           {TABS.map(t => (
-            <button key={t} onClick={() => setTab(t)} className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all ${tab === t ? 'bg-charcoal text-white' : 'bg-white text-slate hover:bg-gray-100 shadow-sm'}`}>{t}</button>
+            <button key={t} onClick={() => setTab(t)} className={`px-6 py-3.5 rounded-full text-sm font-medium transition-all ${tab === t ? 'bg-charcoal text-white' : 'bg-white text-slate hover:bg-gray-100 shadow-sm'}`}>{t}</button>
           ))}
         </div>
 
@@ -231,13 +231,13 @@ export default function Admin() {
           <div>
             <div className="flex justify-between items-center mb-6">
               <h2 className="font-serif text-2xl">Управление номерами ({rooms.length})</h2>
-              <button onClick={() => setEditingRoom(true)} className="bg-gold text-charcoal px-5 py-2.5 rounded-full text-sm font-medium hover:bg-gold-dark transition-all">+ Добавить номер</button>
+              <button onClick={() => setEditingRoom(true)} className="bg-gold text-charcoal px-5 py-3.5 rounded-full text-sm font-medium hover:bg-gold-dark transition-all">+ Добавить номер</button>
             </div>
 
             {editingRoom && (
               <div ref={formRef} className="bg-white rounded-2xl shadow-sm p-6 mb-6 space-y-4 ring-2 ring-gold">
                 <h3 className="font-serif text-lg">{editingRoom === true ? 'Новый номер' : 'Редактирование'}</h3>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <input placeholder="Название" value={form.name} onChange={e => setForm(p => ({ ...p, name: e.target.value }))} className="bg-cream border-0 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-gold" />
                   <input placeholder="Эмодзи" value={form.image} onChange={e => setForm(p => ({ ...p, image: e.target.value }))} className="bg-cream border-0 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-gold" />
                   <input type="number" placeholder="Цена" value={form.price} onChange={e => setForm(p => ({ ...p, price: Number(e.target.value) }))} className="bg-cream border-0 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-gold" />
@@ -247,8 +247,8 @@ export default function Admin() {
                   <input placeholder="Удобства (через запятую)" value={form.amenities} onChange={e => setForm(p => ({ ...p, amenities: e.target.value }))} className="col-span-2 bg-cream border-0 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-gold" />
                 </div>
                 <div className="flex gap-3">
-                  <button onClick={handleSaveRoom} disabled={saving} className="bg-charcoal text-white px-5 py-2.5 rounded-full text-sm font-medium disabled:opacity-50">{saving ? 'Сохранение...' : 'Сохранить'}</button>
-                  <button onClick={() => setEditingRoom(null)} className="bg-gray-100 text-slate px-5 py-2.5 rounded-full text-sm font-medium">Отмена</button>
+                  <button onClick={handleSaveRoom} disabled={saving} className="bg-charcoal text-white px-5 py-3.5 rounded-full text-sm font-medium disabled:opacity-50">{saving ? 'Сохранение...' : 'Сохранить'}</button>
+                  <button onClick={() => setEditingRoom(null)} className="bg-gray-100 text-slate px-5 py-3.5 rounded-full text-sm font-medium">Отмена</button>
                 </div>
               </div>
             )}
@@ -267,8 +267,8 @@ export default function Admin() {
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
-                    <button onClick={() => handleEditRoom(room)} className={`px-3 py-1.5 rounded-full text-xs font-medium transition ${editingRoom === room.id ? 'bg-gold text-charcoal' : 'bg-gray-100 hover:bg-gray-200'}`}>{editingRoom === room.id ? '✏️ Редактирую...' : '✏️ Изменить'}</button>
-                    <button onClick={() => handleDeleteRoom(room.id)} className="px-3 py-1.5 bg-red-50 hover:bg-red-100 text-red-500 rounded-full text-xs font-medium transition">🗑️ Удалить</button>
+                    <button onClick={() => handleEditRoom(room)} className={`px-3 py-2 rounded-full text-sm font-medium transition ${editingRoom === room.id ? 'bg-gold text-charcoal' : 'bg-gray-100 hover:bg-gray-200'}`}>{editingRoom === room.id ? '✏️ Редактирую...' : '✏️ Изменить'}</button>
+                    <button onClick={() => handleDeleteRoom(room.id)} className="px-3 py-2 bg-red-50 hover:bg-red-100 text-red-500 rounded-full text-sm font-medium transition">🗑️ Удалить</button>
                   </div>
                 </div>
               ))}
@@ -302,8 +302,8 @@ export default function Admin() {
                       <span className={`px-3 py-1 rounded-full text-xs font-medium ${b.status === 'confirmed' ? 'bg-emerald-50 text-emerald-700' : b.status === 'cancelled' ? 'bg-red-50 text-red-500' : 'bg-amber-50 text-amber-700'}`}>
                         {b.status === 'confirmed' ? 'Подтв.' : b.status === 'cancelled' ? 'Отмен.' : 'Ожидает'}
                       </span>
-                      {b.status !== 'confirmed' && <button onClick={() => handleBookingStatus(b.id, 'confirmed')} className="bg-emerald-500 text-white p-2 rounded-xl text-xs hover:bg-emerald-600">✓</button>}
-                      {b.status !== 'cancelled' && <button onClick={() => handleBookingStatus(b.id, 'cancelled')} className="bg-red-400 text-white p-2 rounded-xl text-xs hover:bg-red-500">✕</button>}
+                      {b.status !== 'confirmed' && <button onClick={() => handleBookingStatus(b.id, 'confirmed')} className="bg-emerald-500 text-white px-3 py-2 rounded-xl text-sm hover:bg-emerald-600">✓</button>}
+                      {b.status !== 'cancelled' && <button onClick={() => handleBookingStatus(b.id, 'cancelled')} className="bg-red-400 text-white px-3 py-2 rounded-xl text-sm hover:bg-red-500">✕</button>}
                     </div>
                   </div>
                 </div>
@@ -318,21 +318,21 @@ export default function Admin() {
           <div>
             <div className="flex justify-between items-center mb-6">
               <h2 className="font-serif text-2xl">Управление услугами ({services.length})</h2>
-              <button onClick={() => setEditingService(true)} className="bg-gold text-charcoal px-5 py-2.5 rounded-full text-sm font-medium hover:bg-gold-dark transition-all">+ Добавить услугу</button>
+              <button onClick={() => setEditingService(true)} className="bg-gold text-charcoal px-5 py-3.5 rounded-full text-sm font-medium hover:bg-gold-dark transition-all">+ Добавить услугу</button>
             </div>
 
             {editingService && (
               <div ref={svcFormRef} className="bg-white rounded-2xl shadow-sm p-6 mb-6 space-y-4 ring-2 ring-gold">
                 <h3 className="font-serif text-lg">{editingService === true ? 'Новая услуга' : 'Редактирование'}</h3>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <input placeholder="Название" value={svcForm.name} onChange={e => setSvcForm(p => ({ ...p, name: e.target.value }))} className="bg-cream border-0 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-gold" />
                   <input placeholder="Эмодзи" value={svcForm.image} onChange={e => setSvcForm(p => ({ ...p, image: e.target.value }))} className="bg-cream border-0 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-gold" />
                   <input type="number" placeholder="Цена (0 = бесплатно)" value={svcForm.price} onChange={e => setSvcForm(p => ({ ...p, price: Number(e.target.value) }))} className="bg-cream border-0 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-gold" />
                   <input placeholder="Описание" value={svcForm.description} onChange={e => setSvcForm(p => ({ ...p, description: e.target.value }))} className="bg-cream border-0 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-gold" />
                 </div>
                 <div className="flex gap-3">
-                  <button onClick={handleSaveService} disabled={svcSaving} className="bg-charcoal text-white px-5 py-2.5 rounded-full text-sm font-medium disabled:opacity-50">{svcSaving ? 'Сохранение...' : 'Сохранить'}</button>
-                  <button onClick={() => setEditingService(null)} className="bg-gray-100 text-slate px-5 py-2.5 rounded-full text-sm font-medium">Отмена</button>
+                  <button onClick={handleSaveService} disabled={svcSaving} className="bg-charcoal text-white px-5 py-3.5 rounded-full text-sm font-medium disabled:opacity-50">{svcSaving ? 'Сохранение...' : 'Сохранить'}</button>
+                  <button onClick={() => setEditingService(null)} className="bg-gray-100 text-slate px-5 py-3.5 rounded-full text-sm font-medium">Отмена</button>
                 </div>
               </div>
             )}
@@ -352,9 +352,9 @@ export default function Admin() {
                   </div>
                   <div className="flex items-center gap-3">
                     <span className={`text-sm ${s.active ? 'text-emerald-600' : 'text-red-400'}`}>{s.active ? 'Активна' : 'Отключена'}</span>
-                    <button onClick={() => handleToggleService(s.id, s.active)} className={`px-3 py-1.5 rounded-full text-xs font-medium ${s.active ? 'bg-red-50 text-red-500 hover:bg-red-100' : 'bg-emerald-50 text-emerald-600 hover:bg-emerald-100'}`}>{s.active ? 'Откл' : 'Вкл'}</button>
-                    <button onClick={() => handleEditService(s)} className="px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-full text-xs font-medium">✏️</button>
-                    <button onClick={() => handleDeleteService(s.id)} className="px-3 py-1.5 bg-red-50 hover:bg-red-100 text-red-500 rounded-full text-xs font-medium">🗑️</button>
+                    <button onClick={() => handleToggleService(s.id, s.active)} className={`px-3 py-2 rounded-full text-sm font-medium ${s.active ? 'bg-red-50 text-red-500 hover:bg-red-100' : 'bg-emerald-50 text-emerald-600 hover:bg-emerald-100'}`}>{s.active ? 'Откл' : 'Вкл'}</button>
+                    <button onClick={() => handleEditService(s)} className="px-3 py-2 bg-gray-100 hover:bg-gray-200 rounded-full text-sm font-medium">✏️</button>
+                    <button onClick={() => handleDeleteService(s.id)} className="px-3 py-2 bg-red-50 hover:bg-red-100 text-red-500 rounded-full text-sm font-medium">🗑️</button>
                   </div>
                 </div>
               ))}
@@ -376,7 +376,7 @@ export default function Admin() {
                 <input value={settingsForm.phone || ''} onChange={e => setSettingsForm(p => ({ ...p, phone: e.target.value }))} className="w-full bg-cream border-0 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-gold" /></div>
               <div><label className="block text-xs font-medium text-slate uppercase tracking-wider mb-2">Адрес</label>
                 <input value={settingsForm.address || ''} onChange={e => setSettingsForm(p => ({ ...p, address: e.target.value }))} className="w-full bg-cream border-0 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-gold" /></div>
-              <div className="grid grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div><label className="block text-xs font-medium text-slate uppercase tracking-wider mb-2">Ресепшн</label>
                   <input value={settingsForm.receptionHours || ''} onChange={e => setSettingsForm(p => ({ ...p, receptionHours: e.target.value }))} className="w-full bg-cream border-0 rounded-xl px-3 py-3 text-sm outline-none focus:ring-2 focus:ring-gold" /></div>
                 <div><label className="block text-xs font-medium text-slate uppercase tracking-wider mb-2">Ресторан</label>
@@ -384,7 +384,7 @@ export default function Admin() {
                 <div><label className="block text-xs font-medium text-slate uppercase tracking-wider mb-2">Спа</label>
                   <input value={settingsForm.spaHours || ''} onChange={e => setSettingsForm(p => ({ ...p, spaHours: e.target.value }))} className="w-full bg-cream border-0 rounded-xl px-3 py-3 text-sm outline-none focus:ring-2 focus:ring-gold" /></div>
               </div>
-              <button onClick={handleSaveSettings} className="bg-charcoal text-white px-8 py-3 rounded-full font-medium hover:bg-gold hover:text-charcoal transition-all">Сохранить</button>
+              <button onClick={handleSaveSettings} className="bg-charcoal text-white px-8 py-4 rounded-full font-medium hover:bg-gold hover:text-charcoal transition-all">Сохранить</button>
             </div>
           </div>
         )}

@@ -22,9 +22,9 @@ export default function Footer() {
         <div>
           <h4 className="font-serif text-white text-lg mb-4">Навигация</h4>
           <ul className="space-y-2 text-sm">
-            <li><Link to="/rooms" className="hover:text-gold transition">Номера</Link></li>
-            <li><Link to="/services" className="hover:text-gold transition">Услуги</Link></li>
-            <li><Link to="/cart" className="hover:text-gold transition">Корзина</Link></li>
+            <li><Link to="/rooms" className="hover:text-gold transition block py-2">Номера</Link></li>
+            <li><Link to="/services" className="hover:text-gold transition block py-2">Услуги</Link></li>
+            <li><Link to="/cart" className="hover:text-gold transition block py-2">Корзина</Link></li>
           </ul>
         </div>
         <div>

@@ -46,7 +46,7 @@ export default function Navbar() {
           <div className="hidden lg:flex items-center gap-8">
             <Link to="/rooms" className={linkClass('/rooms')}>Номера</Link>
             <Link to="/services" className={linkClass('/services')}>Услуги</Link>
-            <Link to="/cart" className="relative text-gray-300 hover:text-gold transition">
+            <Link to="/cart" className="relative text-gray-300 hover:text-gold transition p-2">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
               </svg>
@@ -65,31 +65,31 @@ export default function Navbar() {
                   {user.displayName || 'Кабинет'}
                 </Link>
                 {isAdmin && (
-                  <Link to="/admin" className="text-xs bg-gold/10 text-gold px-3 py-1.5 rounded-full hover:bg-gold/20 transition">Админ</Link>
+                  <Link to="/admin" className="text-xs bg-gold/10 text-gold px-3 py-2 rounded-full hover:bg-gold/20 transition">Админ</Link>
                 )}
-                <button onClick={handleLogout} className="text-xs text-gray-500 hover:text-red-400 transition">Выйти</button>
+                <button onClick={handleLogout} className="text-xs text-gray-500 hover:text-red-400 transition py-2">Выйти</button>
               </div>
             ) : (
-              <Link to="/login" className="bg-gold text-charcoal px-5 py-2.5 rounded-full text-sm font-medium hover:bg-gold-dark transition">Войти</Link>
+              <Link to="/login" className="bg-gold text-charcoal px-5 py-3.5 rounded-full text-sm font-medium hover:bg-gold-dark transition">Войти</Link>
             )}
           </div>
 
-          <button className="lg:hidden text-gray-300 text-2xl" onClick={() => setMenuOpen(v => !v)}>☰</button>
+          <button className="lg:hidden text-gray-300 text-2xl p-2" onClick={() => setMenuOpen(v => !v)}>☰</button>
         </div>
 
         {menuOpen && (
           <div className="lg:hidden pb-6 space-y-3 border-t border-white/5 pt-4" onClick={() => setMenuOpen(false)}>
-            <Link to="/rooms" className="block py-2 text-gray-300">Номера</Link>
-            <Link to="/services" className="block py-2 text-gray-300">Услуги</Link>
-            <Link to="/cart" className="block py-2 text-gray-300">Корзина ({items.length})</Link>
+            <Link to="/rooms" className="block py-3 text-gray-300">Номера</Link>
+            <Link to="/services" className="block py-3 text-gray-300">Услуги</Link>
+            <Link to="/cart" className="block py-3 text-gray-300">Корзина ({items.length})</Link>
             {user ? (
               <>
-                <Link to="/dashboard" className="block py-2 text-gray-300">Кабинет</Link>
-                {isAdmin && <Link to="/admin" className="block py-2 text-gold">Админ</Link>}
-                <button onClick={handleLogout} className="block py-2 text-red-400">Выйти</button>
+                <Link to="/dashboard" className="block py-3 text-gray-300">Кабинет</Link>
+                {isAdmin && <Link to="/admin" className="block py-3 text-gold">Админ</Link>}
+                <button onClick={handleLogout} className="block py-3 text-red-400">Выйти</button>
               </>
             ) : (
-              <Link to="/login" className="block py-2 text-gold">Войти</Link>
+              <Link to="/login" className="block py-3 text-gold">Войти</Link>
             )}
           </div>
         )}

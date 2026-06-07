@@ -42,7 +42,7 @@ export default function Home() {
           </div>
         </div>
         <div className="absolute bottom-0 left-0 right-0">
-          <div className="max-w-7xl mx-auto px-6 py-8 grid grid-cols-3 border-t border-white/10">
+          <div className="max-w-7xl mx-auto px-6 py-8 grid grid-cols-1 sm:grid-cols-3 border-t border-white/10">
             {[{ num: `${rooms.length}+`, label: 'Номеров' }, { num: '15', label: 'Лет опыта' }, { num: '50K+', label: 'Довольных гостей' }].map(s => (
               <div key={s.label} className="text-center">
                 <p className="font-serif text-3xl text-gold font-bold">{s.num}</p>

@@ -30,7 +30,7 @@ export default function ServiceCard({ service }) {
         </div>
         <button
           onClick={handleAdd}
-          className="w-full mt-4 bg-gold text-charcoal py-2.5 rounded-full text-sm font-medium hover:bg-gold-dark transition-all"
+          className="w-full mt-4 bg-gold text-charcoal py-3.5 rounded-full text-sm font-medium hover:bg-gold-dark transition-all"
         >
           Заказать
         </button>

@@ -45,7 +45,7 @@ export default function Dashboard() {
         ) : bookings.length === 0 ? (
           <div className="bg-white rounded-3xl shadow-sm p-12 text-center">
             <p className="text-slate mb-6">У вас пока нет бронирований</p>
-            <Link to="/rooms" className="text-gold font-medium hover:text-gold-dark">
+            <Link to="/rooms" className="text-gold font-medium hover:text-gold-dark block py-3">
               Забронировать номер →
             </Link>
           </div>

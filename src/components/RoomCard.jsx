@@ -59,14 +59,14 @@ export default function RoomCard({ room, available = true, checkIn = '', checkOu
         <div className="flex gap-2 mt-4">
           <Link
             to={`/rooms/${room.id}`}
-            className="flex-1 text-center border-2 border-charcoal text-charcoal py-2.5 rounded-full text-sm font-medium hover:bg-charcoal hover:text-white transition-all"
+            className="flex-1 text-center border-2 border-charcoal text-charcoal py-3.5 rounded-full text-sm font-medium hover:bg-charcoal hover:text-white transition-all"
           >
             Подробнее
           </Link>
           <button
             onClick={handleBook}
             disabled={dateSelected && !available}
-            className={`flex-1 py-2.5 rounded-full text-sm font-medium transition-all ${
+            className={`flex-1 py-3.5 rounded-full text-sm font-medium transition-all ${
               dateSelected && !available
                 ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
                 : 'bg-charcoal text-white hover:bg-gold hover:text-charcoal'

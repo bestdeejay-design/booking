@@ -97,7 +97,7 @@ export default function RoomDetail() {
               </div>
             </div>
             <div className="mt-10 glass rounded-2xl p-8">
-              <div className="grid grid-cols-2 gap-4 mb-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
                 <div>
                   <label className="block text-xs font-medium text-slate uppercase tracking-wider mb-2">Заезд</label>
                   <input type="date" value={checkIn} onChange={e => { setCheckIn(e.target.value); if (!checkOut) setCheckOut(e.target.value); }}
