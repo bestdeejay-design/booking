@@ -12,7 +12,7 @@ const SEED_ROOMS = [
   { name: 'Семейный', description: 'Две спальни для комфортного отдыха всей семьёй', price: 15000, capacity: 4, size: 60, image: '/booking/images/rooms/femaly-room4.jpg', amenities: ['Wi-Fi', 'Кондиционер', 'ТВ', 'Мини-бар', 'Ванна', 'Детская кроватка'] },
   { name: 'Президентский люкс', description: 'Максимальный комфорт: две спальни, кабинет, терраса', price: 50000, capacity: 4, size: 120, image: '/booking/images/rooms/pr-lux.jpg', amenities: ['Wi-Fi', 'ТВ', 'Мини-бар', 'Джакузи', 'Сауна', 'Терраса', 'Кабинет'] },
   { name: 'Пентхаус', description: 'Целый этаж с панорамным видом и личным бассейном', price: 80000, capacity: 6, size: 200, image: '/booking/images/rooms/penthause.jpg', amenities: ['Wi-Fi', 'ТВ', 'Бассейн', 'Джакузи', 'Сауна', 'Терраса', 'Лифт'] },
-  { name: 'Эконом', description: 'Бюджетный вариант с минимальным набором удобств', price: 3000, capacity: 2, size: 15, image: '/booking/images/rooms/evonomy.jpg', amenities: ['Wi-Fi', 'ТВ', 'Душ'] },
+  { name: 'Стандарт мини', description: 'Бюджетный вариант с минимальным набором удобств', price: 3000, capacity: 2, size: 15, image: '/booking/images/rooms/standart-mini.jpg', amenities: ['Wi-Fi', 'ТВ', 'Душ'] },
 ];
 
 const SEED_SERVICES = [
@@ -59,12 +59,16 @@ export function DataProvider({ children }) {
         const rs = await getDocs(collection(db, 'rooms'));
         setRooms(rs.docs.map(d => ({ id: d.id, ...d.data() })));
       } else {
+        const oldNames = { 'Эконом': 'Стандарт мини' };
         const updated = [];
         for (const room of r) {
           const seed = SEED_ROOMS.find(s => s.name === room.name);
-          if (seed && seed.image.startsWith('/') && !room.image?.startsWith('/')) {
-            updated.push({ ...room, image: seed.image });
-            try { await updateDoc(doc(db, 'rooms', room.id), { image: seed.image }); } catch {}
+          const needsRename = oldNames[room.name];
+          const seedByName = needsRename ? SEED_ROOMS.find(s => s.name === needsRename) : null;
+          const src = needsRename ? seedByName : seed;
+          if (src && src.image.startsWith('/') && (!room.image?.startsWith('/') || needsRename)) {
+            updated.push({ ...room, image: src.image, name: needsRename || room.name });
+            try { await updateDoc(doc(db, 'rooms', room.id), { image: src.image, name: needsRename || room.name }); } catch {}
           } else {
             updated.push(room);
           }
