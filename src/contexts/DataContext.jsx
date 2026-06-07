@@ -5,8 +5,8 @@ import { db } from '../config/firebase';
 const DataContext = createContext(null);
 
 const SEED_ROOMS = [
-  { name: 'Стандарт одноместный', description: 'Уютный номер с одной кроватью, вид на город', price: 5000, capacity: 1, size: 20, image: '/booking/images/rooms/standard1.jpeg', amenities: ['Wi-Fi', 'Кондиционер', 'ТВ', 'Мини-бар', 'Душ'] },
-  { name: 'Стандарт двухместный', description: 'Просторный номер с двумя кроватями', price: 7000, capacity: 2, size: 25, image: '/booking/images/rooms/standard2.jpg', amenities: ['Wi-Fi', 'Кондиционер', 'ТВ', 'Мини-бар', 'Ванна'] },
+  { name: 'Стандарт одноместный', description: 'Уютный номер с одной кроватью, вид на город', price: 5000, capacity: 1, size: 20, image: '/booking/images/rooms/standart1.jpeg', amenities: ['Wi-Fi', 'Кондиционер', 'ТВ', 'Мини-бар', 'Душ'] },
+  { name: 'Стандарт двухместный', description: 'Просторный номер с двумя кроватями', price: 7000, capacity: 2, size: 25, image: '/booking/images/rooms/standart2.jpg', amenities: ['Wi-Fi', 'Кондиционер', 'ТВ', 'Мини-бар', 'Ванна'] },
   { name: 'Делюкс', description: 'Улучшенный номер с панорамным видом и балконом', price: 12000, capacity: 2, size: 35, image: '/booking/images/rooms/delux.jpeg', amenities: ['Wi-Fi', 'Кондиционер', 'ТВ', 'Мини-бар', 'Джакузи', 'Балкон', 'Халаты'] },
   { name: 'Люкс', description: 'Просторный номер с гостиной зоной и джакузи', price: 18000, capacity: 3, size: 50, image: '/booking/images/rooms/lux-jacousi.jpg', amenities: ['Wi-Fi', 'Кондиционер', 'ТВ', 'Мини-бар', 'Джакузи', 'Гостиная', 'Халаты', 'Кофемашина'] },
   { name: 'Семейный', description: 'Две спальни для комфортного отдыха всей семьёй', price: 15000, capacity: 4, size: 60, image: '/booking/images/rooms/femaly-room4.jpg', amenities: ['Wi-Fi', 'Кондиционер', 'ТВ', 'Мини-бар', 'Ванна', 'Детская кроватка'] },
