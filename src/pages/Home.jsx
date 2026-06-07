@@ -19,7 +19,7 @@ export default function Home() {
           backgroundImage: 'radial-gradient(circle at 20% 50%, #c9a96e 1px, transparent 1px)', backgroundSize: '50px 50px'
         }} />
         <div className="absolute right-0 top-0 bottom-0 w-2/5 bg-gradient-to-l from-gold/10 to-transparent" />
-        <div className="relative max-w-7xl mx-auto px-6 py-20 w-full">
+        <div className="relative max-w-7xl mx-auto px-6 py-20 pb-48 md:pb-20 w-full">
           <div className="max-w-2xl">
             <p className="text-gold tracking-[.25em] text-sm mb-6 font-medium">ДОБРО ПОЖАЛОВАТЬ</p>
             <h1 className="font-serif text-5xl md:text-7xl text-white leading-tight mb-6">
