@@ -14,41 +14,43 @@ export default function Home() {
 
   return (
     <div>
-      <section className="relative min-h-[90vh] flex items-center bg-charcoal overflow-hidden">
-        <div className="absolute inset-0 opacity-5" style={{
+      <section className="bg-charcoal overflow-hidden">
+        <div className="absolute inset-0 opacity-5 pointer-events-none" style={{
           backgroundImage: 'radial-gradient(circle at 20% 50%, #c9a96e 1px, transparent 1px)', backgroundSize: '50px 50px'
         }} />
-        <div className="absolute right-0 top-0 bottom-0 w-2/5 bg-gradient-to-l from-gold/10 to-transparent" />
-        <div className="relative max-w-7xl mx-auto px-6 py-20 pb-48 md:pb-20 w-full">
+        <div className="absolute right-0 top-0 bottom-0 w-2/5 bg-gradient-to-l from-gold/10 to-transparent pointer-events-none" />
+        <div className="relative max-w-7xl mx-auto px-6 pt-16 pb-8 md:pt-24 md:pb-12 w-full">
           <div className="max-w-2xl">
-            <p className="text-gold tracking-[.25em] text-sm mb-6 font-medium">ДОБРО ПОЖАЛОВАТЬ</p>
-            <h1 className="font-serif text-5xl md:text-7xl text-white leading-tight mb-6">
+            <p className="text-gold tracking-[.25em] text-xs md:text-sm mb-4 md:mb-6 font-medium">ДОБРО ПОЖАЛОВАТЬ</p>
+            <h1 className="font-serif text-4xl md:text-7xl text-white leading-tight mb-4 md:mb-6">
               {(() => {
                 const name = settings.hotelName || 'Grand Hotel';
                 const parts = name.trim().split(/\s+/);
                 if (parts.length === 1) return <span className="text-gold">{name}</span>;
                 const first = parts[0];
                 const rest = parts.slice(1).join(' ');
-                return <>{first}<br/><span className="text-gold">{rest}</span></>;
+                return <>{first}<br className="hidden md:block" /><span className="text-gold"> {rest}</span></>;
               })()}
             </h1>
-            <p className="text-gray-400 text-lg mb-10 leading-relaxed max-w-lg">
-              Откройте для себя мир изысканного комфорта в историческом сердце столицы. Каждый номер — произведение искусства.
+            <p className="text-gray-400 text-sm md:text-lg mb-8 md:mb-10 leading-relaxed max-w-lg">
+              Откройте для себя мир изысканного комфорта в историческом сердце столицы.
             </p>
-            <div className="flex flex-wrap gap-4">
-              <Link to="/rooms" className="bg-gold hover:bg-gold-dark text-charcoal px-8 py-4 rounded-full font-medium tracking-wide transition-all hover:shadow-xl hover:shadow-gold/20">Забронировать</Link>
-              <Link to="/services" className="border border-white/20 text-white hover:border-gold hover:text-gold px-8 py-4 rounded-full font-medium tracking-wide transition-all">Услуги отеля</Link>
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+              <Link to="/rooms" className="bg-gold hover:bg-gold-dark text-charcoal px-6 md:px-8 py-3.5 md:py-4 rounded-full font-medium tracking-wide text-sm md:text-base text-center transition-all hover:shadow-xl hover:shadow-gold/20">Забронировать</Link>
+              <Link to="/services" className="border border-white/20 text-white hover:border-gold hover:text-gold px-6 md:px-8 py-3.5 md:py-4 rounded-full font-medium tracking-wide text-sm md:text-base text-center transition-all">Услуги отеля</Link>
             </div>
           </div>
         </div>
-        <div className="absolute bottom-0 left-0 right-0">
-          <div className="max-w-7xl mx-auto px-6 py-8 grid grid-cols-1 sm:grid-cols-3 border-t border-white/10">
-            {[{ num: `${rooms.length}+`, label: 'Номеров' }, { num: '15', label: 'Лет опыта' }, { num: '50K+', label: 'Довольных гостей' }].map(s => (
-              <div key={s.label} className="text-center">
-                <p className="font-serif text-3xl text-gold font-bold">{s.num}</p>
-                <p className="text-gray-500 text-sm mt-1">{s.label}</p>
-              </div>
-            ))}
+        <div className="border-t border-white/10">
+          <div className="max-w-7xl mx-auto px-6 py-6 md:py-8">
+            <div className="flex justify-around md:grid md:grid-cols-3 gap-4 md:gap-0">
+              {[{ num: `${rooms.length}+`, label: 'Номеров' }, { num: '15', label: 'Лет опыта' }, { num: '50K+', label: 'Довольных гостей' }].map(s => (
+                <div key={s.label} className="text-center">
+                  <p className="font-serif text-2xl md:text-3xl text-gold font-bold">{s.num}</p>
+                  <p className="text-gray-500 text-xs md:text-sm mt-0.5 md:mt-1">{s.label}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
