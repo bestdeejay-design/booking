@@ -4,6 +4,7 @@ import { AuthProvider } from './contexts/AuthContext';
 import { CartProvider } from './contexts/CartContext';
 import { DataProvider } from './contexts/DataContext';
 import Layout from './components/Layout';
+import ScrollToTop from './components/ScrollToTop';
 import ProtectedRoute from './components/ProtectedRoute';
 import AdminRoute from './components/AdminRoute';
 import Home from './pages/Home';
@@ -21,6 +22,7 @@ import SetupAdmin from './pages/SetupAdmin';
 export default function App() {
   return (
     <HashRouter>
+      <ScrollToTop />
       <AuthProvider>
         <CartProvider>
         <DataProvider>
