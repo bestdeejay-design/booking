@@ -47,10 +47,22 @@ export function AuthProvider({ children }) {
       role: 'user',
       createdAt: new Date().toISOString(),
     });
+    setUser({ ...cred.user, name, email, role: 'user' });
+    setIsAdmin(false);
   };
 
-  const login = (email, password) =>
-    signInWithEmailAndPassword(auth, email, password);
+  const login = async (email, password) => {
+    const cred = await signInWithEmailAndPassword(auth, email, password);
+    try {
+      const userDoc = await getDoc(doc(db, 'users', cred.user.uid));
+      const userData = userDoc.exists() ? userDoc.data() : {};
+      setUser({ ...cred.user, ...userData });
+      setIsAdmin(userData.role === 'admin');
+    } catch {
+      setUser(cred.user);
+      setIsAdmin(false);
+    }
+  };
 
   const logout = () => signOut(auth);
 
