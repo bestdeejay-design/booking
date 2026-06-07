@@ -59,7 +59,17 @@ export function DataProvider({ children }) {
         const rs = await getDocs(collection(db, 'rooms'));
         setRooms(rs.docs.map(d => ({ id: d.id, ...d.data() })));
       } else {
-        setRooms(r);
+        const updated = [];
+        for (const room of r) {
+          const seed = SEED_ROOMS.find(s => s.name === room.name);
+          if (seed && seed.image.startsWith('/') && !room.image?.startsWith('/')) {
+            updated.push({ ...room, image: seed.image });
+            try { await updateDoc(doc(db, 'rooms', room.id), { image: seed.image }); } catch {}
+          } else {
+            updated.push(room);
+          }
+        }
+        setRooms(updated);
       }
 
       if (s.length === 0) {
@@ -67,7 +77,17 @@ export function DataProvider({ children }) {
         const ss = await getDocs(collection(db, 'services'));
         setServices(ss.docs.map(d => ({ id: d.id, ...d.data() })));
       } else {
-        setServices(s);
+        const updated = [];
+        for (const svc of s) {
+          const seed = SEED_SERVICES.find(se => se.name === svc.name);
+          if (seed && seed.image.startsWith('/') && !svc.image?.startsWith('/')) {
+            updated.push({ ...svc, image: seed.image });
+            try { await updateDoc(doc(db, 'services', svc.id), { image: seed.image }); } catch {}
+          } else {
+            updated.push(svc);
+          }
+        }
+        setServices(updated);
       }
 
       if (settingsSnap.empty) {
