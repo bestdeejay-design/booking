@@ -65,8 +65,8 @@ export function DataProvider({ children }) {
           const seed = SEED_ROOMS.find(s => s.name === room.name);
           const needsRename = oldNames[room.name];
           const seedByName = needsRename ? SEED_ROOMS.find(s => s.name === needsRename) : null;
-          const src = needsRename ? seedByName : seed;
-          if (src && src.image.startsWith('/') && (!room.image?.startsWith('/') || needsRename)) {
+          const src = needsRename ? seedByName : seed || SEED_ROOMS.find(s => s.image === room.image);
+          if (src && src.image.startsWith('/') && src.image !== room.image) {
             updated.push({ ...room, image: src.image, name: needsRename || room.name });
             try { await updateDoc(doc(db, 'rooms', room.id), { image: src.image, name: needsRename || room.name }); } catch {}
           } else {
