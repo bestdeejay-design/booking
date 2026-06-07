@@ -35,7 +35,10 @@ export default function RoomCard({ room, available = true, checkIn = '', checkOu
             )}
           </div>
         )}
-        <span className="relative z-10 group-hover:scale-110 transition-transform duration-500">{room.image || '🛏️'}</span>
+        {room.image?.startsWith('/')
+          ? <img src={room.image} alt="" className="absolute inset-0 w-full h-full object-cover" />
+          : <span className="relative z-10 group-hover:scale-110 transition-transform duration-500">{room.image || '🛏️'}</span>
+        }
       </div>
       <div className="p-5">
         <h3 className="font-serif text-xl text-charcoal font-bold">{room.name}</h3>

@@ -187,7 +187,10 @@ export default function Admin() {
                       <tr key={room.id} className="border-b hover:bg-gray-50/50">
                         <td className="sticky left-0 bg-white z-10 p-3">
                           <div className="flex items-center gap-3">
-                            <span className="text-xl">{room.image || '🛏️'}</span>
+                            {room.image?.startsWith('/')
+                              ? <img src={room.image} alt="" className="w-8 h-8 rounded object-cover" />
+                              : <span className="text-xl">{room.image || '🛏️'}</span>
+                            }
                             <div>
                               <p className="font-serif text-sm text-charcoal font-medium leading-tight">{room.name}</p>
                               <p className="text-[10px] text-slate">{room.price.toLocaleString()} ₽</p>
@@ -254,7 +257,10 @@ export default function Admin() {
               {rooms.map(room => (
                 <div key={room.id} className="bg-white rounded-2xl p-5 flex items-center justify-between shadow-sm">
                   <div className="flex items-center gap-4">
-                    <span className="text-3xl">{room.image || '🛏️'}</span>
+                    {room.image?.startsWith('/')
+                      ? <img src={room.image} alt="" className="w-10 h-10 rounded object-cover" />
+                      : <span className="text-3xl">{room.image || '🛏️'}</span>
+                    }
                     <div>
                       <p className="font-serif text-lg text-charcoal">{room.name}</p>
                       <p className="text-slate text-sm">{room.price.toLocaleString()} ₽/ночь · 👥 {room.capacity} · 📐 {room.size}м² · {(room.amenities || []).length} удобств</p>
@@ -335,7 +341,10 @@ export default function Admin() {
               {services.map(s => (
                 <div key={s.id} className="bg-white rounded-2xl p-5 flex items-center justify-between shadow-sm">
                   <div className="flex items-center gap-4">
-                    <span className="text-3xl">{s.image || '🎁'}</span>
+                    {s.image?.startsWith('/')
+                      ? <img src={s.image} alt="" className="w-10 h-10 rounded object-cover" />
+                      : <span className="text-3xl">{s.image || '🎁'}</span>
+                    }
                     <div>
                       <p className="font-serif text-lg text-charcoal">{s.name}</p>
                       <p className="text-slate text-sm">{s.price > 0 ? `${s.price.toLocaleString()} ₽` : 'Бесплатно'}</p>

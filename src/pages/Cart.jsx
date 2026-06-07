@@ -37,7 +37,10 @@ export default function Cart() {
         <div className="space-y-4">
           {items.map((item, i) => (
             <div key={`${item.type}-${item.id}-${i}`} className="bg-white rounded-2xl p-6 flex items-center gap-5 shadow-sm">
-              <div className="text-4xl">{item.image || '📦'}</div>
+              {item.image?.startsWith('/')
+                ? <img src={item.image} alt="" className="w-14 h-14 rounded-xl object-cover" />
+                : <div className="text-4xl">{item.image || '📦'}</div>
+              }
               <div className="flex-1">
                 <h3 className="font-serif text-lg text-charcoal font-bold">{item.name}</h3>
                 <p className="text-slate text-sm mt-1">{item.description}</p>

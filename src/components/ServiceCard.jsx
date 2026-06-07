@@ -15,7 +15,10 @@ export default function ServiceCard({ service }) {
   return (
     <div className="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl hover:-translate-y-1 transition-all duration-500">
       <div className="h-40 bg-gradient-to-br from-cream to-gold-light flex items-center justify-center text-4xl relative overflow-hidden">
-        <span className="group-hover:scale-110 transition-transform duration-500">{service.image || '🎁'}</span>
+        {service.image?.startsWith('/')
+          ? <img src={service.image} alt="" className="absolute inset-0 w-full h-full object-cover" />
+          : <span className="group-hover:scale-110 transition-transform duration-500">{service.image || '🎁'}</span>
+        }
       </div>
       <div className="p-5">
         <h3 className="font-serif text-xl text-charcoal font-bold">{service.name}</h3>

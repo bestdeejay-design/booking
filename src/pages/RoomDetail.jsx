@@ -76,7 +76,10 @@ export default function RoomDetail() {
                   }
                 </div>
               )}
-              <span className="relative z-10">{room.image || '🛏️'}</span>
+              {room.image?.startsWith('/')
+                ? <img src={room.image} alt="" className="absolute inset-0 w-full h-full object-cover" />
+                : <span className="relative z-10">{room.image || '🛏️'}</span>
+              }
             </div>
           </div>
           <div>

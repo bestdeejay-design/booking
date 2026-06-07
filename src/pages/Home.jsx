@@ -81,7 +81,10 @@ export default function Home() {
               <Link key={r.id} to="/rooms" className="group bg-cream rounded-2xl overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-500">
                 <div className="h-52 bg-gradient-to-br from-charcoal to-charcoal-light flex items-center justify-center text-6xl relative overflow-hidden">
                   <div className="absolute inset-0 bg-gold/5 group-hover:bg-gold/10 transition" />
-                  <span className="relative z-10 group-hover:scale-110 transition-transform duration-500">{r.image || '🛏️'}</span>
+                  {r.image?.startsWith('/')
+                    ? <img src={r.image} alt="" className="absolute inset-0 w-full h-full object-cover" />
+                    : <span className="relative z-10 group-hover:scale-110 transition-transform duration-500">{r.image || '🛏️'}</span>
+                  }
                 </div>
                 <div className="p-6">
                   <h3 className="font-serif text-2xl text-charcoal mb-1">{r.name}</h3>
