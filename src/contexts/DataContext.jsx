@@ -5,26 +5,26 @@ import { db } from '../config/firebase';
 const DataContext = createContext(null);
 
 const SEED_ROOMS = [
-  { name: 'Стандарт одноместный', description: 'Уютный номер с одной кроватью, вид на город', price: 5000, capacity: 1, size: 20, image: '/booking/images/rooms/standart1.jpeg', amenities: ['Wi-Fi', 'Кондиционер', 'ТВ', 'Мини-бар', 'Душ'] },
-  { name: 'Стандарт двухместный', description: 'Просторный номер с двумя кроватями', price: 7000, capacity: 2, size: 25, image: '/booking/images/rooms/standart2.jpg', amenities: ['Wi-Fi', 'Кондиционер', 'ТВ', 'Мини-бар', 'Ванна'] },
-  { name: 'Делюкс', description: 'Улучшенный номер с панорамным видом и балконом', price: 12000, capacity: 2, size: 35, image: '/booking/images/rooms/delux.jpeg', amenities: ['Wi-Fi', 'Кондиционер', 'ТВ', 'Мини-бар', 'Джакузи', 'Балкон', 'Халаты'] },
-  { name: 'Люкс', description: 'Просторный номер с гостиной зоной и джакузи', price: 18000, capacity: 3, size: 50, image: '/booking/images/rooms/lux-jacousi.jpg', amenities: ['Wi-Fi', 'Кондиционер', 'ТВ', 'Мини-бар', 'Джакузи', 'Гостиная', 'Халаты', 'Кофемашина'] },
-  { name: 'Семейный', description: 'Две спальни для комфортного отдыха всей семьёй', price: 15000, capacity: 4, size: 60, image: '/booking/images/rooms/femaly-room4.jpg', amenities: ['Wi-Fi', 'Кондиционер', 'ТВ', 'Мини-бар', 'Ванна', 'Детская кроватка'] },
-  { name: 'Президентский люкс', description: 'Максимальный комфорт: две спальни, кабинет, терраса', price: 50000, capacity: 4, size: 120, image: '/booking/images/rooms/pr-lux.jpg', amenities: ['Wi-Fi', 'ТВ', 'Мини-бар', 'Джакузи', 'Сауна', 'Терраса', 'Кабинет'] },
-  { name: 'Пентхаус', description: 'Целый этаж с панорамным видом и личным бассейном', price: 80000, capacity: 6, size: 200, image: '/booking/images/rooms/penthause.jpg', amenities: ['Wi-Fi', 'ТВ', 'Бассейн', 'Джакузи', 'Сауна', 'Терраса', 'Лифт'] },
-  { name: 'Стандарт мини', description: 'Бюджетный вариант с минимальным набором удобств', price: 3000, capacity: 2, size: 15, image: '/booking/images/rooms/standart-mini.jpg', amenities: ['Wi-Fi', 'ТВ', 'Душ'] },
+  { name: 'Стандарт одноместный', description: 'Уютный номер с одной кроватью, вид на город', price: 5000, capacity: 1, size: 20, image: '/booking/images/rooms/standart1.webp', amenities: ['Wi-Fi', 'Кондиционер', 'ТВ', 'Мини-бар', 'Душ'] },
+  { name: 'Стандарт двухместный', description: 'Просторный номер с двумя кроватями', price: 7000, capacity: 2, size: 25, image: '/booking/images/rooms/standart2.webp', amenities: ['Wi-Fi', 'Кондиционер', 'ТВ', 'Мини-бар', 'Ванна'] },
+  { name: 'Делюкс', description: 'Улучшенный номер с панорамным видом и балконом', price: 12000, capacity: 2, size: 35, image: '/booking/images/rooms/delux.webp', amenities: ['Wi-Fi', 'Кондиционер', 'ТВ', 'Мини-бар', 'Джакузи', 'Балкон', 'Халаты'] },
+  { name: 'Люкс', description: 'Просторный номер с гостиной зоной и джакузи', price: 18000, capacity: 3, size: 50, image: '/booking/images/rooms/lux-jacousi.webp', amenities: ['Wi-Fi', 'Кондиционер', 'ТВ', 'Мини-бар', 'Джакузи', 'Гостиная', 'Халаты', 'Кофемашина'] },
+  { name: 'Семейный', description: 'Две спальни для комфортного отдыха всей семьёй', price: 15000, capacity: 4, size: 60, image: '/booking/images/rooms/femaly-room4.webp', amenities: ['Wi-Fi', 'Кондиционер', 'ТВ', 'Мини-бар', 'Ванна', 'Детская кроватка'] },
+  { name: 'Президентский люкс', description: 'Максимальный комфорт: две спальни, кабинет, терраса', price: 50000, capacity: 4, size: 120, image: '/booking/images/rooms/pr-lux.webp', amenities: ['Wi-Fi', 'ТВ', 'Мини-бар', 'Джакузи', 'Сауна', 'Терраса', 'Кабинет'] },
+  { name: 'Пентхаус', description: 'Целый этаж с панорамным видом и личным бассейном', price: 80000, capacity: 6, size: 200, image: '/booking/images/rooms/penthause.webp', amenities: ['Wi-Fi', 'ТВ', 'Бассейн', 'Джакузи', 'Сауна', 'Терраса', 'Лифт'] },
+  { name: 'Стандарт мини', description: 'Бюджетный вариант с минимальным набором удобств', price: 3000, capacity: 2, size: 15, image: '/booking/images/rooms/standart-mini.webp', amenities: ['Wi-Fi', 'ТВ', 'Душ'] },
 ];
 
 const SEED_SERVICES = [
-  { name: 'Спа-центр', description: 'Массаж, сауна, хаммам, косметология', price: 5000, image: '/booking/images/services/spa-hamam_.jpg', active: true },
-  { name: 'Ресторан', description: 'Авторская кухня от шеф-повара', price: 3000, image: '/booking/images/services/restoran.jpg', active: true },
+  { name: 'Спа-центр', description: 'Массаж, сауна, хаммам, косметология', price: 5000, image: '/booking/images/services/spa-hamam_.webp', active: true },
+  { name: 'Ресторан', description: 'Авторская кухня от шеф-повара', price: 3000, image: '/booking/images/services/restoran.webp', active: true },
   { name: 'Трансфер', description: 'Встреча в аэропорту, аренда авто с водителем', price: 2500, image: '/booking/images/services/transfer.webp', active: true },
-  { name: 'Прачечная', description: 'Стирка, глажка и химчистка', price: 1500, image: '/booking/images/services/washing.jpg', active: true },
-  { name: 'Фитнес-зал', description: 'Современные тренажёры, групповые занятия', price: 0, image: '/booking/images/services/fitness.jpeg', active: true },
-  { name: 'Бассейн', description: 'Открытый и крытый бассейны с подогревом', price: 0, image: '/booking/images/services/bass302.jpeg', active: true },
-  { name: 'Конференц-зал', description: 'Зал на 100 человек с проектором', price: 10000, image: '/booking/images/services/conferens.jpg', active: true },
-  { name: 'Парковка', description: 'Охраняемая подземная парковка', price: 500, image: '/booking/images/services/parking.jpg', active: true },
-  { name: 'Детская комната', description: 'Игровая зона с аниматором', price: 0, image: '/booking/images/services/child-room.jpg', active: true },
+  { name: 'Прачечная', description: 'Стирка, глажка и химчистка', price: 1500, image: '/booking/images/services/washing.webp', active: true },
+  { name: 'Фитнес-зал', description: 'Современные тренажёры, групповые занятия', price: 0, image: '/booking/images/services/fitness.webp', active: true },
+  { name: 'Бассейн', description: 'Открытый и крытый бассейны с подогревом', price: 0, image: '/booking/images/services/bass302.webp', active: true },
+  { name: 'Конференц-зал', description: 'Зал на 100 человек с проектором', price: 10000, image: '/booking/images/services/conferens.webp', active: true },
+  { name: 'Парковка', description: 'Охраняемая подземная парковка', price: 500, image: '/booking/images/services/parking.webp', active: true },
+  { name: 'Детская комната', description: 'Игровая зона с аниматором', price: 0, image: '/booking/images/services/child-room.webp', active: true },
 ];
 
 const DEFAULT_SETTINGS = {

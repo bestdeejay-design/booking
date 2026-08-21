@@ -74,7 +74,7 @@ export default function Navbar() {
             )}
           </div>
 
-          <button className="lg:hidden text-gray-300 text-2xl p-2" onClick={() => setMenuOpen(v => !v)}>☰</button>
+          <button className="lg:hidden text-gray-300 text-2xl p-2" onClick={() => setMenuOpen(v => !v)} aria-label="Открыть меню" aria-expanded={menuOpen}>☰</button>
         </div>
 
         {menuOpen && (
