@@ -20,12 +20,12 @@ export default function Navbar() {
   };
 
   const linkClass = (path) =>
-    `text-sm font-medium tracking-wide transition ${
-      location.pathname === path ? 'text-gold' : 'text-gray-300 hover:text-gold'
+    `nav-link text-sm font-medium tracking-wide ${
+      location.pathname === path ? 'is-active text-gold' : 'text-gray-300 hover:text-gold'
     }`;
 
   return (
-    <nav className="bg-charcoal/95 backdrop-blur-md sticky top-0 z-50 border-b border-white/5">
+    <nav className="bg-charcoal/95 backdrop-blur-md sticky top-0 z-50 border-b border-white/5 shadow-[0_8px_30px_-18px_rgba(0,0,0,.6)]">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between h-20">
           <Link to="/" className="flex items-center gap-3 group">
@@ -46,7 +46,7 @@ export default function Navbar() {
           <div className="hidden lg:flex items-center gap-8">
             <Link to="/rooms" className={linkClass('/rooms')}>Номера</Link>
             <Link to="/services" className={linkClass('/services')}>Услуги</Link>
-            <Link to="/cart" className="relative text-gray-300 hover:text-gold transition p-2">
+            <Link to="/cart" className="relative text-gray-300 hover:text-gold rounded-full p-2.5 hover:bg-white/5 transition" aria-label="Корзина">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
               </svg>
@@ -70,7 +70,7 @@ export default function Navbar() {
                 <button onClick={handleLogout} className="text-xs text-gray-500 hover:text-red-400 transition py-2">Выйти</button>
               </div>
             ) : (
-              <Link to="/login" className="bg-gold text-charcoal px-5 py-3.5 rounded-full text-sm font-medium hover:bg-gold-dark transition">Войти</Link>
+              <Link to="/login" className="btn btn-primary btn-sm px-5">Войти</Link>
             )}
           </div>
 
@@ -78,18 +78,18 @@ export default function Navbar() {
         </div>
 
         {menuOpen && (
-          <div className="lg:hidden pb-6 space-y-3 border-t border-white/5 pt-4" onClick={() => setMenuOpen(false)}>
-            <Link to="/rooms" className="block py-3 text-gray-300">Номера</Link>
-            <Link to="/services" className="block py-3 text-gray-300">Услуги</Link>
-            <Link to="/cart" className="block py-3 text-gray-300">Корзина ({items.length})</Link>
+          <div className="lg:hidden pb-6 space-y-1 border-t border-white/5 pt-4" onClick={() => setMenuOpen(false)}>
+            <Link to="/rooms" className="block px-3 py-3 rounded-lg text-gray-300 hover:text-gold hover:bg-white/5 transition">Номера</Link>
+            <Link to="/services" className="block px-3 py-3 rounded-lg text-gray-300 hover:text-gold hover:bg-white/5 transition">Услуги</Link>
+            <Link to="/cart" className="block px-3 py-3 rounded-lg text-gray-300 hover:text-gold hover:bg-white/5 transition">Корзина ({items.length})</Link>
             {user ? (
               <>
-                <Link to="/dashboard" className="block py-3 text-gray-300">Кабинет</Link>
-                {isAdmin && <Link to="/admin" className="block py-3 text-gold">Админ</Link>}
-                <button onClick={handleLogout} className="block py-3 text-red-400">Выйти</button>
+                <Link to="/dashboard" className="block px-3 py-3 rounded-lg text-gray-300 hover:text-gold hover:bg-white/5 transition">Кабинет</Link>
+                {isAdmin && <Link to="/admin" className="block px-3 py-3 rounded-lg text-gold hover:bg-white/5 transition">Админ</Link>}
+                <button onClick={handleLogout} className="block w-full text-left px-3 py-3 rounded-lg text-red-400 hover:bg-white/5 transition">Выйти</button>
               </>
             ) : (
-              <Link to="/login" className="block py-3 text-gold">Войти</Link>
+              <Link to="/login" className="btn btn-primary w-full mt-3">Войти</Link>
             )}
           </div>
         )}

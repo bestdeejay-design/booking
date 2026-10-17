@@ -145,12 +145,12 @@ export default function Admin() {
   return (
     <div className="bg-cream min-h-screen">
       <div className="max-w-6xl mx-auto px-6 py-16">
-        <p className="text-gold tracking-[.2em] text-sm font-medium mb-2">УПРАВЛЕНИЕ</p>
-        <h1 className="font-serif text-4xl text-charcoal mb-10">Админ-панель</h1>
+        <p className="eyebrow mb-2">УПРАВЛЕНИЕ</p>
+        <h1 className="display-2 text-charcoal mb-10">Админ-панель</h1>
 
         <div className="flex flex-wrap gap-2 mb-10">
           {TABS.map(t => (
-            <button key={t} onClick={() => setTab(t)} className={`px-6 py-3.5 rounded-full text-sm font-medium transition-all ${tab === t ? 'bg-charcoal text-white' : 'bg-white text-slate hover:bg-gray-100 shadow-sm'}`}>{t}</button>
+            <button key={t} onClick={() => setTab(t)} className={`btn px-6 py-3 ${tab === t ? 'btn-dark' : 'bg-white text-slate border-line hover:border-charcoal hover:text-charcoal shadow-sm'}`}>{t}</button>
           ))}
         </div>
 
@@ -168,7 +168,7 @@ export default function Admin() {
                 <span className="flex items-center gap-1"><span className="w-3 h-3 rounded bg-red-300 border border-red-400" /> Занято</span>
               </div>
             </div>
-            <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
+            <div className="card overflow-hidden">
               <div className="overflow-x-auto">
                 <table className="w-full min-w-[800px]">
                   <thead>
@@ -231,31 +231,31 @@ export default function Admin() {
           <div>
             <div className="flex justify-between items-center mb-6">
               <h2 className="font-serif text-2xl">Управление номерами ({rooms.length})</h2>
-              <button onClick={() => setEditingRoom(true)} className="bg-gold text-charcoal px-5 py-3.5 rounded-full text-sm font-medium hover:bg-gold-dark transition-all">+ Добавить номер</button>
+              <button onClick={() => setEditingRoom(true)} className="btn btn-primary px-5">+ Добавить номер</button>
             </div>
 
             {editingRoom && (
-              <div ref={formRef} className="bg-white rounded-2xl shadow-sm p-6 mb-6 space-y-4 ring-2 ring-gold">
+              <div ref={formRef} className="card p-6 mb-6 space-y-4 ring-2 ring-gold">
                 <h3 className="font-serif text-lg">{editingRoom === true ? 'Новый номер' : 'Редактирование'}</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <input placeholder="Название" value={form.name} onChange={e => setForm(p => ({ ...p, name: e.target.value }))} className="bg-cream border-0 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-gold" />
-                  <input placeholder="Эмодзи" value={form.image} onChange={e => setForm(p => ({ ...p, image: e.target.value }))} className="bg-cream border-0 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-gold" />
-                  <input type="number" placeholder="Цена" value={form.price} onChange={e => setForm(p => ({ ...p, price: Number(e.target.value) }))} className="bg-cream border-0 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-gold" />
-                  <input type="number" placeholder="Вместимость" value={form.capacity} onChange={e => setForm(p => ({ ...p, capacity: Number(e.target.value) }))} className="bg-cream border-0 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-gold" />
-                  <input type="number" placeholder="Размер (м²)" value={form.size} onChange={e => setForm(p => ({ ...p, size: Number(e.target.value) }))} className="bg-cream border-0 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-gold" />
-                  <input placeholder="Описание" value={form.description} onChange={e => setForm(p => ({ ...p, description: e.target.value }))} className="bg-cream border-0 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-gold" />
-                  <input placeholder="Удобства (через запятую)" value={form.amenities} onChange={e => setForm(p => ({ ...p, amenities: e.target.value }))} className="col-span-2 bg-cream border-0 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-gold" />
+                  <input placeholder="Название" value={form.name} onChange={e => setForm(p => ({ ...p, name: e.target.value }))} className="field" />
+                  <input placeholder="Эмодзи" value={form.image} onChange={e => setForm(p => ({ ...p, image: e.target.value }))} className="field" />
+                  <input type="number" placeholder="Цена" value={form.price} onChange={e => setForm(p => ({ ...p, price: Number(e.target.value) }))} className="field" />
+                  <input type="number" placeholder="Вместимость" value={form.capacity} onChange={e => setForm(p => ({ ...p, capacity: Number(e.target.value) }))} className="field" />
+                  <input type="number" placeholder="Размер (м²)" value={form.size} onChange={e => setForm(p => ({ ...p, size: Number(e.target.value) }))} className="field" />
+                  <input placeholder="Описание" value={form.description} onChange={e => setForm(p => ({ ...p, description: e.target.value }))} className="field" />
+                  <input placeholder="Удобства (через запятую)" value={form.amenities} onChange={e => setForm(p => ({ ...p, amenities: e.target.value }))} className="field md:col-span-2" />
                 </div>
                 <div className="flex gap-3">
-                  <button onClick={handleSaveRoom} disabled={saving} className="bg-charcoal text-white px-5 py-3.5 rounded-full text-sm font-medium disabled:opacity-50">{saving ? 'Сохранение...' : 'Сохранить'}</button>
-                  <button onClick={() => setEditingRoom(null)} className="bg-gray-100 text-slate px-5 py-3.5 rounded-full text-sm font-medium">Отмена</button>
+                  <button onClick={handleSaveRoom} disabled={saving} className="btn btn-dark px-5">{saving ? 'Сохранение...' : 'Сохранить'}</button>
+                  <button onClick={() => setEditingRoom(null)} className="btn px-5 bg-gray-100 text-slate border-gray-200 hover:bg-gray-200 hover:text-charcoal">Отмена</button>
                 </div>
               </div>
             )}
 
             <div className="space-y-3">
               {rooms.map(room => (
-                <div key={room.id} className="bg-white rounded-2xl p-5 flex items-center justify-between shadow-sm">
+                <div key={room.id} className="card p-5 flex items-center justify-between">
                   <div className="flex items-center gap-4">
                     {room.image?.startsWith('/')
                       ? <img src={room.image} alt="" className="w-10 h-10 rounded object-cover" />
@@ -287,7 +287,7 @@ export default function Admin() {
             ) : (
             <div className="space-y-4">
               {bookings.map(b => (
-                <div key={b.id} className="bg-white rounded-2xl p-6 shadow-sm">
+                <div key={b.id} className="card p-6">
                   <div className="flex flex-wrap items-center justify-between gap-4">
                     <div>
                       <h3 className="font-serif text-lg text-charcoal">{b.guest}</h3>
@@ -318,28 +318,28 @@ export default function Admin() {
           <div>
             <div className="flex justify-between items-center mb-6">
               <h2 className="font-serif text-2xl">Управление услугами ({services.length})</h2>
-              <button onClick={() => setEditingService(true)} className="bg-gold text-charcoal px-5 py-3.5 rounded-full text-sm font-medium hover:bg-gold-dark transition-all">+ Добавить услугу</button>
+              <button onClick={() => setEditingService(true)} className="btn btn-primary px-5">+ Добавить услугу</button>
             </div>
 
             {editingService && (
-              <div ref={svcFormRef} className="bg-white rounded-2xl shadow-sm p-6 mb-6 space-y-4 ring-2 ring-gold">
+              <div ref={svcFormRef} className="card p-6 mb-6 space-y-4 ring-2 ring-gold">
                 <h3 className="font-serif text-lg">{editingService === true ? 'Новая услуга' : 'Редактирование'}</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <input placeholder="Название" value={svcForm.name} onChange={e => setSvcForm(p => ({ ...p, name: e.target.value }))} className="bg-cream border-0 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-gold" />
-                  <input placeholder="Эмодзи" value={svcForm.image} onChange={e => setSvcForm(p => ({ ...p, image: e.target.value }))} className="bg-cream border-0 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-gold" />
-                  <input type="number" placeholder="Цена (0 = бесплатно)" value={svcForm.price} onChange={e => setSvcForm(p => ({ ...p, price: Number(e.target.value) }))} className="bg-cream border-0 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-gold" />
-                  <input placeholder="Описание" value={svcForm.description} onChange={e => setSvcForm(p => ({ ...p, description: e.target.value }))} className="bg-cream border-0 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-gold" />
+                  <input placeholder="Название" value={svcForm.name} onChange={e => setSvcForm(p => ({ ...p, name: e.target.value }))} className="field" />
+                  <input placeholder="Эмодзи" value={svcForm.image} onChange={e => setSvcForm(p => ({ ...p, image: e.target.value }))} className="field" />
+                  <input type="number" placeholder="Цена (0 = бесплатно)" value={svcForm.price} onChange={e => setSvcForm(p => ({ ...p, price: Number(e.target.value) }))} className="field" />
+                  <input placeholder="Описание" value={svcForm.description} onChange={e => setSvcForm(p => ({ ...p, description: e.target.value }))} className="field" />
                 </div>
                 <div className="flex gap-3">
-                  <button onClick={handleSaveService} disabled={svcSaving} className="bg-charcoal text-white px-5 py-3.5 rounded-full text-sm font-medium disabled:opacity-50">{svcSaving ? 'Сохранение...' : 'Сохранить'}</button>
-                  <button onClick={() => setEditingService(null)} className="bg-gray-100 text-slate px-5 py-3.5 rounded-full text-sm font-medium">Отмена</button>
+                  <button onClick={handleSaveService} disabled={svcSaving} className="btn btn-dark px-5">{svcSaving ? 'Сохранение...' : 'Сохранить'}</button>
+                  <button onClick={() => setEditingService(null)} className="btn px-5 bg-gray-100 text-slate border-gray-200 hover:bg-gray-200 hover:text-charcoal">Отмена</button>
                 </div>
               </div>
             )}
 
             <div className="space-y-3">
               {services.map(s => (
-                <div key={s.id} className="bg-white rounded-2xl p-5 flex items-center justify-between shadow-sm">
+                <div key={s.id} className="card p-5 flex items-center justify-between">
                   <div className="flex items-center gap-4">
                     {s.image?.startsWith('/')
                       ? <img src={s.image} alt="" className="w-10 h-10 rounded object-cover" />
@@ -364,27 +364,27 @@ export default function Admin() {
 
         {/* НАСТРОЙКИ */}
         {tab === 'Настройки' && (
-          <div className="bg-white rounded-2xl shadow-sm p-8 max-w-lg">
+          <div className="card p-8 max-w-lg">
             <h2 className="font-serif text-2xl text-charcoal mb-6">Настройки отеля</h2>
             <p className="text-xs text-slate mb-6">Изменения применятся на всём сайте после сохранения</p>
             <div className="space-y-5">
               <div><label className="block text-xs font-medium text-slate uppercase tracking-wider mb-2">Название отеля</label>
-                <input value={settingsForm.hotelName || ''} onChange={e => setSettingsForm(p => ({ ...p, hotelName: e.target.value }))} className="w-full bg-cream border-0 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-gold" /></div>
+                <input value={settingsForm.hotelName || ''} onChange={e => setSettingsForm(p => ({ ...p, hotelName: e.target.value }))} className="field" /></div>
               <div><label className="block text-xs font-medium text-slate uppercase tracking-wider mb-2">Email</label>
-                <input value={settingsForm.email || ''} onChange={e => setSettingsForm(p => ({ ...p, email: e.target.value }))} className="w-full bg-cream border-0 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-gold" /></div>
+                <input value={settingsForm.email || ''} onChange={e => setSettingsForm(p => ({ ...p, email: e.target.value }))} className="field" /></div>
               <div><label className="block text-xs font-medium text-slate uppercase tracking-wider mb-2">Телефон</label>
-                <input value={settingsForm.phone || ''} onChange={e => setSettingsForm(p => ({ ...p, phone: e.target.value }))} className="w-full bg-cream border-0 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-gold" /></div>
+                <input value={settingsForm.phone || ''} onChange={e => setSettingsForm(p => ({ ...p, phone: e.target.value }))} className="field" /></div>
               <div><label className="block text-xs font-medium text-slate uppercase tracking-wider mb-2">Адрес</label>
-                <input value={settingsForm.address || ''} onChange={e => setSettingsForm(p => ({ ...p, address: e.target.value }))} className="w-full bg-cream border-0 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-gold" /></div>
+                <input value={settingsForm.address || ''} onChange={e => setSettingsForm(p => ({ ...p, address: e.target.value }))} className="field" /></div>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div><label className="block text-xs font-medium text-slate uppercase tracking-wider mb-2">Ресепшн</label>
-                  <input value={settingsForm.receptionHours || ''} onChange={e => setSettingsForm(p => ({ ...p, receptionHours: e.target.value }))} className="w-full bg-cream border-0 rounded-xl px-3 py-3 text-sm outline-none focus:ring-2 focus:ring-gold" /></div>
+                  <input value={settingsForm.receptionHours || ''} onChange={e => setSettingsForm(p => ({ ...p, receptionHours: e.target.value }))} className="field text-sm" /></div>
                 <div><label className="block text-xs font-medium text-slate uppercase tracking-wider mb-2">Ресторан</label>
-                  <input value={settingsForm.restaurantHours || ''} onChange={e => setSettingsForm(p => ({ ...p, restaurantHours: e.target.value }))} className="w-full bg-cream border-0 rounded-xl px-3 py-3 text-sm outline-none focus:ring-2 focus:ring-gold" /></div>
+                  <input value={settingsForm.restaurantHours || ''} onChange={e => setSettingsForm(p => ({ ...p, restaurantHours: e.target.value }))} className="field text-sm" /></div>
                 <div><label className="block text-xs font-medium text-slate uppercase tracking-wider mb-2">Спа</label>
-                  <input value={settingsForm.spaHours || ''} onChange={e => setSettingsForm(p => ({ ...p, spaHours: e.target.value }))} className="w-full bg-cream border-0 rounded-xl px-3 py-3 text-sm outline-none focus:ring-2 focus:ring-gold" /></div>
+                  <input value={settingsForm.spaHours || ''} onChange={e => setSettingsForm(p => ({ ...p, spaHours: e.target.value }))} className="field text-sm" /></div>
               </div>
-              <button onClick={handleSaveSettings} className="bg-charcoal text-white px-8 py-4 rounded-full font-medium hover:bg-gold hover:text-charcoal transition-all">Сохранить</button>
+              <button onClick={handleSaveSettings} className="btn btn-dark px-8 py-4">Сохранить</button>
             </div>
           </div>
         )}

@@ -13,8 +13,8 @@ export default function Services() {
   return (
     <div className="bg-cream min-h-screen">
       <div className="max-w-7xl mx-auto px-6 py-16">
-        <p className="text-gold tracking-[.2em] text-sm mb-3 font-medium">УСЛУГИ</p>
-        <h1 className="font-serif text-4xl md:text-5xl text-charcoal mb-4">Услуги отеля</h1>
+        <p className="eyebrow mb-3">УСЛУГИ</p>
+        <h1 className="display-2 text-charcoal mb-4">Услуги отеля</h1>
         <p className="text-slate mb-12 max-w-2xl leading-relaxed">
           Мы предлагаем широкий спектр услуг, чтобы сделать ваше пребывание максимально комфортным.
         </p>

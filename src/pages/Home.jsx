@@ -14,15 +14,25 @@ export default function Home() {
 
   return (
     <div>
-      <section className="bg-charcoal overflow-hidden">
-        <div className="absolute inset-0 opacity-5 pointer-events-none" style={{
-          backgroundImage: 'radial-gradient(circle at 20% 50%, #c9a96e 1px, transparent 1px)', backgroundSize: '50px 50px'
-        }} />
-        <div className="absolute right-0 top-0 bottom-0 w-2/5 bg-gradient-to-l from-gold/10 to-transparent pointer-events-none" />
-        <div className="relative max-w-7xl mx-auto px-6 pt-16 pb-8 md:pt-24 md:pb-12 w-full">
-          <div className="max-w-2xl">
-            <p className="text-gold tracking-[.25em] text-xs md:text-sm mb-4 md:mb-6 font-medium">ДОБРО ПОЖАЛОВАТЬ</p>
-            <h1 className="font-serif text-4xl md:text-7xl text-white leading-tight mb-4 md:mb-6">
+      {/* ===== HERO: фото + градиентный оверлей ===== */}
+      <section className="relative bg-charcoal overflow-hidden">
+        <div
+          className="hero-photo absolute inset-0 pointer-events-none"
+          aria-hidden="true"
+          style={{ backgroundImage: `url(${import.meta.env.BASE_URL}images/rooms/penthause.webp)` }}
+        />
+        <div className="hero-overlay absolute inset-0 pointer-events-none" aria-hidden="true" />
+        <div
+          className="absolute -right-32 -top-32 w-[520px] h-[520px] rounded-full pointer-events-none"
+          aria-hidden="true"
+          style={{ background: 'radial-gradient(circle, rgba(201,169,110,.16), transparent 65%)' }}
+        />
+
+        <div className="relative max-w-7xl mx-auto px-6 pt-16 pb-10 md:pt-28 md:pb-20 w-full">
+          <div className="max-w-2xl animate-rise">
+            <span className="badge-demo">✦ Демо AXIIOM</span>
+            <p className="eyebrow eyebrow-light mt-6 md:mt-8 mb-4 md:mb-5">ДОБРО ПОЖАЛОВАТЬ</p>
+            <h1 className="display-1 text-white mb-4 md:mb-6">
               {(() => {
                 const name = settings.hotelName || 'Grand Hotel';
                 const parts = name.trim().split(/\s+/);
@@ -32,22 +42,23 @@ export default function Home() {
                 return <>{first}<br className="hidden md:block" /><span className="text-gold"> {rest}</span></>;
               })()}
             </h1>
-            <p className="text-gray-400 text-sm md:text-lg mb-8 md:mb-10 leading-relaxed max-w-lg">
+            <p className="text-gray-300 text-base md:text-lg mb-8 md:mb-10 leading-relaxed max-w-lg">
               Откройте для себя мир изысканного комфорта в историческом сердце столицы.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-              <Link to="/rooms" className="bg-gold hover:bg-gold-dark text-charcoal px-6 md:px-8 py-3.5 md:py-4 rounded-full font-medium tracking-wide text-sm md:text-base text-center transition-all hover:shadow-xl hover:shadow-gold/20">Забронировать</Link>
-              <Link to="/services" className="border border-white/20 text-white hover:border-gold hover:text-gold px-6 md:px-8 py-3.5 md:py-4 rounded-full font-medium tracking-wide text-sm md:text-base text-center transition-all">Услуги отеля</Link>
+              <Link to="/rooms" className="btn btn-primary px-8 py-4 text-base">Забронировать</Link>
+              <Link to="/services" className="btn btn-outline-light px-8 py-4 text-base">Услуги отеля</Link>
             </div>
           </div>
         </div>
-        <div className="border-t border-white/10">
+
+        <div className="relative border-t border-white/10 bg-black/25 backdrop-blur-sm">
           <div className="max-w-7xl mx-auto px-6 py-6 md:py-8">
             <div className="flex justify-around md:grid md:grid-cols-3 gap-4 md:gap-0">
               {[{ num: `${rooms.length}+`, label: 'Номеров' }, { num: '15', label: 'Лет опыта' }, { num: '50K+', label: 'Довольных гостей' }].map(s => (
                 <div key={s.label} className="text-center">
-                  <p className="font-serif text-2xl md:text-3xl text-gold font-bold">{s.num}</p>
-                  <p className="text-gray-500 text-xs md:text-sm mt-0.5 md:mt-1">{s.label}</p>
+                  <p className="font-serif text-2xl md:text-4xl text-gold font-bold">{s.num}</p>
+                  <p className="text-gray-400 text-xs md:text-sm mt-1">{s.label}</p>
                 </div>
               ))}
             </div>
@@ -55,14 +66,19 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-24 bg-cream">
+      {/* ===== ПРЕИМУЩЕСТВА ===== */}
+      <section className="py-16 md:py-24 bg-cream">
         <div className="max-w-7xl mx-auto px-6">
-          <p className="text-gold tracking-[.2em] text-sm text-center mb-3 font-medium">ПРЕИМУЩЕСТВА</p>
-          <h2 className="font-serif text-4xl md:text-5xl text-center text-charcoal mb-16">Почему выбирают нас</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <p className="eyebrow text-center mb-3">ПРЕИМУЩЕСТВА</p>
+          <h2 className="display-2 text-center text-charcoal mb-12 md:mb-16">Почему выбирают нас</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {FEATURES.map((f, i) => (
-              <div key={i} className="text-center group">
-                <div className="w-16 h-16 mx-auto mb-6 bg-white rounded-2xl flex items-center justify-center text-2xl shadow-lg group-hover:shadow-xl group-hover:-translate-y-1 transition-all duration-300">{f.icon}</div>
+              <div
+                key={i}
+                className="card card-hover p-8 text-center group"
+                style={{ animationDelay: `${i * 70}ms` }}
+              >
+                <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-b from-gold-light to-cream border border-gold/30 flex items-center justify-center text-2xl text-gold-deep shadow-sm group-hover:scale-105 group-hover:shadow-md transition-all duration-300">{f.icon}</div>
                 <h3 className="font-serif text-xl text-charcoal mb-3">{f.title}</h3>
                 <p className="text-slate text-sm leading-relaxed">{f.desc}</p>
               </div>
@@ -71,32 +87,34 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-24 bg-white">
+      {/* ===== НОМЕРА (превью) ===== */}
+      <section className="py-16 md:py-24 bg-white border-y border-line">
         <div className="max-w-7xl mx-auto px-6">
-          <p className="text-gold tracking-[.2em] text-sm text-center mb-3 font-medium">НОМЕРА</p>
-          <h2 className="font-serif text-4xl md:text-5xl text-center text-charcoal mb-4">Выберите свой номер</h2>
-          <p className="text-slate text-center mb-16 max-w-lg mx-auto">
+          <p className="eyebrow text-center mb-3">НОМЕРА</p>
+          <h2 className="display-2 text-center text-charcoal mb-4">Выберите свой номер</h2>
+          <p className="text-slate text-center mb-12 md:mb-16 max-w-lg mx-auto">
             От уютных стандартов до президентских апартаментов — у нас есть идеальный вариант для каждого
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {preview.map((r) => (
-              <Link key={r.id} to="/rooms" className="group bg-cream rounded-2xl overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-500">
-                <div className="h-52 bg-gradient-to-br from-charcoal to-charcoal-light flex items-center justify-center text-6xl relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gold/5 group-hover:bg-gold/10 transition" />
+              <Link key={r.id} to="/rooms" className="group card card-hover overflow-hidden flex flex-col">
+                <div className="relative overflow-hidden bg-gradient-to-br from-charcoal to-charcoal-light" style={{ aspectRatio: '4 / 3' }}>
                   {r.image?.startsWith('/')
-                    ? <img src={r.image} alt={r.name} className="absolute inset-0 w-full h-full object-cover" />
-                    : <span className="relative z-10 group-hover:scale-110 transition-transform duration-500">{r.image || '🛏️'}</span>
+                    ? <img src={r.image} alt={r.name} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    : <span className="absolute inset-0 flex items-center justify-center text-6xl group-hover:scale-110 transition-transform duration-500">{r.image || '🛏️'}</span>
                   }
+                  <div className="absolute inset-0 bg-charcoal/0 group-hover:bg-charcoal/10 transition-colors duration-300" />
                 </div>
-                <div className="p-6">
+                <div className="p-6 flex flex-col flex-1">
                   <h3 className="font-serif text-2xl text-charcoal mb-1">{r.name}</h3>
-                  <p className="text-slate text-sm mb-4">{r.description}</p>
+                  <p className="text-slate text-sm mb-4 line-clamp-2">{r.description}</p>
                   <div className="flex items-center gap-4 text-xs text-slate mb-4">
                     <span>👥 {r.capacity} гостей</span>
+                    <span aria-hidden="true" className="w-px h-3.5 bg-line" />
                     <span>📐 {r.size} м²</span>
                   </div>
-                  <div className="flex items-end justify-between">
-                    <span className="font-serif text-2xl text-charcoal font-bold">{r.price.toLocaleString()} ₽</span>
+                  <div className="flex items-baseline justify-between mt-auto">
+                    <span className="price text-2xl">{r.price.toLocaleString()} ₽</span>
                     <span className="text-slate text-xs">/ ночь</span>
                   </div>
                 </div>
@@ -104,22 +122,23 @@ export default function Home() {
             ))}
           </div>
           <div className="text-center mt-12">
-            <Link to="/rooms" className="inline-block border-2 border-charcoal text-charcoal hover:bg-charcoal hover:text-white px-8 py-3.5 rounded-full font-medium tracking-wide transition-all">Все номера →</Link>
+            <Link to="/rooms" className="btn btn-outline px-8 py-3.5">Все номера →</Link>
           </div>
         </div>
       </section>
 
-      <section className="py-24 bg-charcoal relative overflow-hidden">
-        <div className="absolute inset-0 opacity-5" style={{
+      {/* ===== CTA ===== */}
+      <section className="py-16 md:py-24 bg-charcoal relative overflow-hidden">
+        <div className="absolute inset-0 opacity-5 pointer-events-none" style={{
           backgroundImage: 'radial-gradient(circle at 80% 50%, #c9a96e 1px, transparent 1px)', backgroundSize: '40px 40px'
         }} />
         <div className="relative max-w-4xl mx-auto text-center px-6">
-          <p className="text-gold tracking-[.2em] text-sm mb-4 font-medium">ЗАБРОНИРУЙТЕ СЕЙЧАС</p>
-          <h2 className="font-serif text-4xl md:text-6xl text-white mb-6">Готовы к идеальному отдыху?</h2>
+          <p className="eyebrow eyebrow-light mb-4">ЗАБРОНИРУЙТЕ СЕЙЧАС</p>
+          <h2 className="display-2 md:text-5xl lg:text-6xl text-white mb-6">Готовы к идеальному отдыху?</h2>
           <p className="text-gray-400 text-lg mb-10 max-w-lg mx-auto">
             Забронируйте номер прямо сейчас и получите бутылку шампанского в подарок
           </p>
-          <Link to="/rooms" className="inline-block bg-gold hover:bg-gold-dark text-charcoal px-10 py-4 rounded-full font-medium text-lg tracking-wide transition-all hover:shadow-xl hover:shadow-gold/20">Выбрать номер</Link>
+          <Link to="/rooms" className="btn btn-primary px-10 py-4 text-lg">Выбрать номер</Link>
         </div>
       </section>
     </div>

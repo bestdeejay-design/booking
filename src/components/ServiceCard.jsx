@@ -13,24 +13,24 @@ export default function ServiceCard({ service }) {
   };
 
   return (
-    <div className="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl hover:-translate-y-1 transition-all duration-500">
-      <div className="h-40 bg-gradient-to-br from-cream to-gold-light flex items-center justify-center text-4xl relative overflow-hidden">
+    <div className="card card-hover group flex flex-col overflow-hidden">
+      <div className="relative overflow-hidden bg-gradient-to-br from-cream to-gold-light" style={{ aspectRatio: '4 / 3' }}>
         {service.image?.startsWith('/')
-          ? <img src={service.image} alt="" className="absolute inset-0 w-full h-full object-cover" />
-          : <span className="group-hover:scale-110 transition-transform duration-500">{service.image || '🎁'}</span>
+          ? <img src={service.image} alt={service.name} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+          : <span className="absolute inset-0 flex items-center justify-center text-4xl group-hover:scale-110 transition-transform duration-500">{service.image || '🎁'}</span>
         }
       </div>
-      <div className="p-5">
+      <div className="p-5 flex flex-col flex-1">
         <h3 className="font-serif text-xl text-charcoal font-bold">{service.name}</h3>
-        <p className="text-slate text-sm mt-2 leading-relaxed">{service.description}</p>
-        <div className="flex items-center justify-between mt-4">
-          <span className="font-serif text-2xl font-bold text-charcoal">
+        <p className="text-slate text-sm mt-2 leading-relaxed line-clamp-2">{service.description}</p>
+        <div className="flex items-center justify-between mt-auto pt-4">
+          <span className="price text-2xl">
             {service.price > 0 ? `${service.price.toLocaleString()} ₽` : 'Бесплатно'}
           </span>
         </div>
         <button
           onClick={handleAdd}
-          className="w-full mt-4 bg-gold text-charcoal py-3.5 rounded-full text-sm font-medium hover:bg-gold-dark transition-all"
+          className="btn btn-primary w-full mt-4"
         >
           Заказать
         </button>

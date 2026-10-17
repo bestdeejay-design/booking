@@ -22,33 +22,48 @@ export default function RoomCard({ room, available = true, checkIn = '', checkOu
     toast.success(`${room.name} добавлен в корзину`);
   };
 
+  const amenities = (room.amenities || []).slice(0, 3);
+
   return (
-    <div className="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl hover:-translate-y-1 transition-all duration-500">
-      <div className="h-48 bg-gradient-to-br from-charcoal to-charcoal-light flex items-center justify-center text-5xl relative overflow-hidden">
-        <div className="absolute inset-0 bg-gold/5 group-hover:bg-gold/10 transition" />
+    <div className="card card-hover group flex flex-col overflow-hidden">
+      <div className="relative overflow-hidden bg-gradient-to-br from-charcoal to-charcoal-light" style={{ aspectRatio: '4 / 3' }}>
         {dateSelected && (
           <div className="absolute top-3 left-3 z-20">
             {available ? (
-              <span className="bg-emerald-500 text-white text-xs font-medium px-3 py-1 rounded-full">Свободен</span>
+              <span className="bg-emerald-500/95 backdrop-blur-sm text-white text-xs font-medium px-3 py-1 rounded-full shadow-sm">Свободен</span>
             ) : (
-              <span className="bg-red-500 text-white text-xs font-medium px-3 py-1 rounded-full">Занят</span>
+              <span className="bg-red-500/95 backdrop-blur-sm text-white text-xs font-medium px-3 py-1 rounded-full shadow-sm">Занят</span>
             )}
           </div>
         )}
         {room.image?.startsWith('/')
-          ? <img src={room.image} alt={room.name} className="absolute inset-0 w-full h-full object-cover" />
-          : <span className="relative z-10 group-hover:scale-110 transition-transform duration-500">{room.image || '🛏️'}</span>
+          ? <img src={room.image} alt={room.name} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+          : <span className="absolute inset-0 flex items-center justify-center text-5xl group-hover:scale-110 transition-transform duration-500">{room.image || '🛏️'}</span>
         }
+        <div className="absolute inset-0 bg-charcoal/0 group-hover:bg-charcoal/10 transition-colors duration-300" />
       </div>
-      <div className="p-5">
-        <h3 className="font-serif text-xl text-charcoal font-bold">{room.name}</h3>
-        <p className="text-slate text-sm mt-2 leading-relaxed">{room.description}</p>
-        <div className="flex items-center gap-4 mt-3 text-xs text-slate">
+
+      <div className="p-5 flex flex-col flex-1">
+        <h3 className="font-serif text-xl text-charcoal font-bold leading-snug">{room.name}</h3>
+        <p className="text-slate text-sm mt-2 leading-relaxed line-clamp-2">{room.description}</p>
+
+        <div className="flex items-center gap-3 mt-3 text-xs text-slate">
           <span>👥 {room.capacity} гостей</span>
+          <span aria-hidden="true" className="w-px h-3.5 bg-line" />
           <span>📐 {room.size} м²</span>
         </div>
-        <div className="flex items-baseline gap-1 mt-4">
-          <span className="font-serif text-2xl font-bold text-charcoal">{room.price.toLocaleString()} ₽</span>
+
+        {amenities.length > 0 && (
+          <div className="flex flex-wrap gap-1.5 mt-3">
+            {amenities.map(a => <span key={a} className="badge">{a}</span>)}
+            {(room.amenities?.length || 0) > 3 && (
+              <span className="badge">+{room.amenities.length - 3}</span>
+            )}
+          </div>
+        )}
+
+        <div className="flex items-baseline gap-1.5 mt-auto pt-4">
+          <span className="price text-2xl">{room.price.toLocaleString()} ₽</span>
           <span className="text-slate text-xs">/ ночь</span>
         </div>
         {nights > 0 && (
@@ -56,21 +71,18 @@ export default function RoomCard({ room, available = true, checkIn = '', checkOu
             {nights} {nights === 1 ? 'ночь' : 'ночей'} → {(room.price * nights).toLocaleString()} ₽
           </p>
         )}
+
         <div className="flex gap-2 mt-4">
           <Link
             to={`/rooms/${room.id}`}
-            className="flex-1 text-center border-2 border-charcoal text-charcoal py-3.5 rounded-full text-sm font-medium hover:bg-charcoal hover:text-white transition-all"
+            className="btn btn-outline flex-1 py-3"
           >
             Подробнее
           </Link>
           <button
             onClick={handleBook}
             disabled={dateSelected && !available}
-            className={`flex-1 py-3.5 rounded-full text-sm font-medium transition-all ${
-              dateSelected && !available
-                ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-                : 'bg-charcoal text-white hover:bg-gold hover:text-charcoal'
-            }`}
+            className="btn btn-dark flex-1 py-3"
           >
             {dateSelected && !available ? 'Занят' : 'Забронировать'}
           </button>

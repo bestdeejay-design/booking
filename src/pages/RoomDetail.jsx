@@ -63,10 +63,10 @@ export default function RoomDetail() {
   return (
     <div className="bg-cream min-h-screen">
       <div className="max-w-7xl mx-auto px-6 py-12">
-        <Link to="/rooms" className="text-slate hover:text-gold transition text-sm inline-flex items-center gap-1">← Назад</Link>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mt-6">
+        <Link to="/rooms" className="text-slate hover:text-gold-dark transition text-sm inline-flex items-center gap-1">← Назад</Link>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 mt-6">
           <div>
-            <div className="h-96 bg-gradient-to-br from-charcoal to-charcoal-light rounded-3xl flex items-center justify-center text-9xl relative overflow-hidden shadow-2xl">
+            <div className="relative overflow-hidden bg-gradient-to-br from-charcoal to-charcoal-light rounded-2xl shadow-2xl shadow-charcoal/25" style={{ aspectRatio: '4 / 3' }}>
               <div className="absolute inset-0 bg-gold/5" />
               {dateSelected && (
                 <div className="absolute top-4 left-4 z-20">
@@ -77,14 +77,14 @@ export default function RoomDetail() {
                 </div>
               )}
               {room.image?.startsWith('/')
-                ? <img src={room.image} alt="" className="absolute inset-0 w-full h-full object-cover" />
-                : <span className="relative z-10">{room.image || '🛏️'}</span>
+                ? <img src={room.image} alt={room.name} className="absolute inset-0 w-full h-full object-cover" />
+                : <span className="absolute inset-0 flex items-center justify-center text-9xl">{room.image || '🛏️'}</span>
               }
             </div>
           </div>
           <div>
-            <p className="text-gold tracking-[.2em] text-sm font-medium">НОМЕР</p>
-            <h1 className="font-serif text-4xl md:text-5xl text-charcoal mt-2">{room.name}</h1>
+            <p className="eyebrow">НОМЕР</p>
+            <h1 className="display-2 text-charcoal mt-2">{room.name}</h1>
             <p className="text-slate mt-6 leading-relaxed text-lg">{room.description}</p>
             <div className="flex items-center gap-8 mt-6 text-slate">
               <span className="text-lg">👥 {room.capacity} гостей</span>
@@ -93,37 +93,33 @@ export default function RoomDetail() {
             <div className="mt-8">
               <h3 className="font-serif text-lg text-charcoal mb-3">Удобства</h3>
               <div className="flex flex-wrap gap-2">
-                {amenities.map(a => <span key={a} className="bg-white text-charcoal px-4 py-2 rounded-full text-sm shadow-sm">{a}</span>)}
+                {amenities.map(a => <span key={a} className="badge py-2 px-4 text-sm">{a}</span>)}
               </div>
             </div>
-            <div className="mt-10 glass rounded-2xl p-8">
+            <div className="mt-10 glass p-6 md:p-8">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
                 <div>
                   <label className="block text-xs font-medium text-slate uppercase tracking-wider mb-2">Заезд</label>
                   <input type="date" value={checkIn} onChange={e => { setCheckIn(e.target.value); if (!checkOut) setCheckOut(e.target.value); }}
                     min={new Date().toISOString().split('T')[0]}
-                    className="w-full bg-white border-0 rounded-xl px-4 py-3 text-charcoal focus:ring-2 focus:ring-gold outline-none" />
+                    className="field" />
                 </div>
                 <div>
                   <label className="block text-xs font-medium text-slate uppercase tracking-wider mb-2">Выезд</label>
                   <input type="date" value={checkOut} onChange={e => setCheckOut(e.target.value)}
                     min={checkIn || new Date().toISOString().split('T')[0]}
-                    className="w-full bg-white border-0 rounded-xl px-4 py-3 text-charcoal focus:ring-2 focus:ring-gold outline-none" />
+                    className="field" />
                 </div>
               </div>
               {nights > 0 && (
                 <div className="flex items-baseline justify-center gap-3 mb-6">
                   <span className="text-slate text-sm">{nights} {nights === 1 ? 'ночь' : 'ночей'} —</span>
-                  <span className="font-serif text-3xl font-bold text-charcoal">{(room.price * nights).toLocaleString()} ₽</span>
+                  <span className="price text-3xl">{(room.price * nights).toLocaleString()} ₽</span>
                 </div>
               )}
               <button onClick={handleBook}
                 disabled={dateSelected && !isAvailable}
-                className={`w-full py-4 rounded-full font-medium text-lg tracking-wide transition-all ${
-                  dateSelected && !isAvailable
-                    ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-                    : 'bg-charcoal hover:bg-gold text-white hover:text-charcoal'
-                }`}>
+                className="btn btn-dark w-full py-4 text-base">
                 {dateSelected && !isAvailable ? 'Занят на эти даты' : `Забронировать · ${room.price.toLocaleString()} ₽ / ночь`}
               </button>
             </div>

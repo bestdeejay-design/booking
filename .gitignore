@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Локальные превью-скриншоты (не публикуются)
+docs/screenshots-preview/

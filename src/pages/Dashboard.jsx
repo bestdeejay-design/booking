@@ -30,8 +30,8 @@ export default function Dashboard() {
   return (
     <div className="bg-cream min-h-screen">
       <div className="max-w-5xl mx-auto px-6 py-16">
-        <div className="bg-white rounded-3xl shadow-sm p-10 mb-10">
-          <p className="text-gold tracking-[.2em] text-sm font-medium mb-2">ЛИЧНЫЙ КАБИНЕТ</p>
+        <div className="card p-8 md:p-10 mb-10">
+          <p className="eyebrow mb-2">ЛИЧНЫЙ КАБИНЕТ</p>
           <h1 className="font-serif text-3xl text-charcoal">
             {user?.displayName || 'Гость'}
           </h1>
@@ -43,7 +43,7 @@ export default function Dashboard() {
         {loading ? (
           <div className="flex justify-center py-10"><div className="w-6 h-6 border-2 border-gold border-t-transparent rounded-full animate-spin" /></div>
         ) : bookings.length === 0 ? (
-          <div className="bg-white rounded-3xl shadow-sm p-12 text-center">
+          <div className="card p-12 text-center">
             <p className="text-slate mb-6">У вас пока нет бронирований</p>
             <Link to="/rooms" className="text-gold font-medium hover:text-gold-dark block py-3">
               Забронировать номер →
@@ -54,7 +54,7 @@ export default function Dashboard() {
             {bookings.map(b => {
               const s = STATUS[b.status] || STATUS.pending;
               return (
-                <div key={b.id} className="bg-white rounded-2xl p-6 shadow-sm flex flex-wrap items-center justify-between gap-4">
+                <div key={b.id} className="card card-hover p-6 flex flex-wrap items-center justify-between gap-4">
                   <div>
                     <h3 className="font-serif text-xl text-charcoal">{b.name}</h3>
                     <p className="text-slate text-sm mt-1">
@@ -62,7 +62,7 @@ export default function Dashboard() {
                     </p>
                   </div>
                   <div className="flex items-center gap-6">
-                    <span className="font-serif text-xl font-bold text-charcoal">{(b.total || b.price).toLocaleString()} ₽</span>
+                    <span className="price text-xl">{(b.total || b.price).toLocaleString()} ₽</span>
                     <span className={`px-4 py-1.5 rounded-full text-sm font-medium ${s.classes}`}>{s.text}</span>
                   </div>
                 </div>

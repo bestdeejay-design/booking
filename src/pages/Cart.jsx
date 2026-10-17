@@ -14,13 +14,13 @@ export default function Cart() {
     return (
       <div className="min-h-[70vh] flex flex-col items-center justify-center px-6">
         <div className="text-7xl mb-6">🛒</div>
-        <h2 className="font-serif text-3xl text-charcoal mb-3">Корзина пуста</h2>
+        <h2 className="display-2 text-charcoal mb-3">Корзина пуста</h2>
         <p className="text-slate mb-8">Добавьте номера и услуги для бронирования</p>
         <div className="flex gap-4 flex-col sm:flex-row">
-          <Link to="/rooms" className="bg-charcoal text-white px-6 py-4 rounded-full font-medium text-center hover:bg-gold hover:text-charcoal transition-all">
+          <Link to="/rooms" className="btn btn-dark px-6 py-4">
             Выбрать номер
           </Link>
-          <Link to="/services" className="border-2 border-charcoal text-charcoal px-6 py-4 rounded-full font-medium text-center hover:bg-charcoal hover:text-white transition-all">
+          <Link to="/services" className="btn btn-outline px-6 py-4">
             Заказать услуги
           </Link>
         </div>
@@ -31,57 +31,57 @@ export default function Cart() {
   return (
     <div className="bg-cream min-h-screen">
       <div className="max-w-4xl mx-auto px-6 py-16">
-        <p className="text-gold tracking-[.2em] text-sm mb-3 font-medium">БРОНИРОВАНИЕ</p>
-        <h1 className="font-serif text-4xl text-charcoal mb-10">Корзина</h1>
+        <p className="eyebrow mb-3">БРОНИРОВАНИЕ</p>
+        <h1 className="display-2 text-charcoal mb-10">Корзина</h1>
 
         <div className="space-y-4">
           {items.map((item, i) => (
-            <div key={`${item.type}-${item.id}-${i}`} className="bg-white rounded-2xl p-6 flex items-center gap-5 shadow-sm flex-wrap">
+            <div key={`${item.type}-${item.id}-${i}`} className="card card-hover p-5 md:p-6 flex items-center gap-5 flex-wrap">
               {item.image?.startsWith('/')
-                ? <img src={item.image} alt="" className="w-14 h-14 rounded-xl object-cover" />
-                : <div className="text-4xl">{item.image || '📦'}</div>
+                ? <img src={item.image} alt="" className="w-16 h-16 rounded-xl object-cover border border-line" />
+                : <div className="w-16 h-16 rounded-xl bg-cream border border-line flex items-center justify-center text-3xl">{item.image || '📦'}</div>
               }
-              <div className="flex-1">
+              <div className="flex-1 min-w-[180px]">
                 <h3 className="font-serif text-lg text-charcoal font-bold">{item.name}</h3>
                 <p className="text-slate text-sm mt-1">{item.description}</p>
                 {item.type === 'room' && item.checkIn && (
-                  <p className="text-gold text-sm mt-1">
+                  <p className="text-gold-dark text-sm mt-1">
                     📅 {item.checkIn} → {item.checkOut} · {item.nights} {item.nights === 1 ? 'ночь' : 'ночей'}
                   </p>
                 )}
-                <p className="font-bold text-charcoal mt-2">{item.price.toLocaleString()} ₽{item.type === 'room' ? ' / ночь' : ''}</p>
+                <p className="price text-lg mt-2">{item.price.toLocaleString()} ₽{item.type === 'room' ? ' / ночь' : ''}</p>
               </div>
               <div className="flex items-center gap-3">
                 {item.type === 'service' && (
                   <select
                     value={item.quantity}
                     onChange={e => updateQuantity(item.id, item.type, Number(e.target.value))}
-                    className="border border-gray-200 rounded-xl px-3 py-3 text-sm outline-none focus:border-gold"
+                    className="field w-auto py-2.5" aria-label="Количество"
                   >
                     {[1,2,3,4,5].map(n => <option key={n} value={n}>{n}</option>)}
                   </select>
                 )}
-                <button onClick={() => handleRemove(item)} className="text-gray-400 hover:text-red-500 px-3 py-2 rounded-xl hover:bg-red-50 transition">✕</button>
+                <button onClick={() => handleRemove(item)} aria-label="Удалить из корзины" className="text-gray-400 hover:text-red-500 px-3 py-2 rounded-lg hover:bg-red-50 transition">✕</button>
               </div>
             </div>
           ))}
         </div>
 
-        <div className="glass rounded-2xl p-8 mt-8">
+        <div className="glass p-6 md:p-8 mt-8">
           <div className="flex justify-between items-center">
             <span className="font-serif text-xl text-charcoal">Итого</span>
-            <span className="font-serif text-3xl font-bold text-charcoal">{total.toLocaleString()} ₽</span>
+            <span className="price text-3xl">{total.toLocaleString()} ₽</span>
           </div>
           <div className="flex gap-4 mt-8 flex-col sm:flex-row">
             <button
               onClick={clearCart}
-              className="border-2 border-gray-300 text-slate px-6 py-4 rounded-full font-medium hover:border-red-400 hover:text-red-500 transition-all"
+              className="btn py-4 border border-line-strong text-slate hover:border-red-300 hover:text-red-500 hover:bg-red-50"
             >
               Очистить
             </button>
             <Link
               to="/payment"
-              className="flex-1 bg-charcoal text-white px-6 py-4 rounded-full font-medium text-center hover:bg-gold hover:text-charcoal transition-all"
+              className="btn btn-dark flex-1 px-6 py-4"
             >
               Перейти к оплате
             </Link>
