@@ -4,6 +4,11 @@ import { db } from '../config/firebase';
 
 const DataContext = createContext(null);
 
+// Демо работает без бэкенда: сид-данные ниже. Firestore подключается опционально;
+// если проект недоступен (публичное демо не имеет прав), флаг глушит все
+// последующие обращения — без ошибок в консоли и лишних сетевых запросов.
+let firestoreEnabled = true;
+
 const SEED_ROOMS = [
   { name: 'Стандарт одноместный', description: 'Уютный номер с одной кроватью, вид на город', price: 5000, capacity: 1, size: 20, image: '/booking/images/rooms/standart1.webp', amenities: ['Wi-Fi', 'Кондиционер', 'ТВ', 'Мини-бар', 'Душ'] },
   { name: 'Стандарт двухместный', description: 'Просторный номер с двумя кроватями', price: 7000, capacity: 2, size: 25, image: '/booking/images/rooms/standart2.webp', amenities: ['Wi-Fi', 'Кондиционер', 'ТВ', 'Мини-бар', 'Ванна'] },
@@ -99,7 +104,8 @@ export function DataProvider({ children }) {
       }
       setSettings(st);
     } catch (e) {
-      console.error('Firestore load error:', e);
+      firestoreEnabled = false;
+      console.info('Демо работает на локальных данных (Firestore недоступен для публичного доступа).');
       setRooms(SEED_ROOMS.map((r, i) => ({ ...r, id: String(i + 1) })));
       setServices(SEED_SERVICES.map((s, i) => ({ ...s, id: String(i + 1) })));
       setSettings(DEFAULT_SETTINGS);
@@ -110,56 +116,52 @@ export function DataProvider({ children }) {
   useEffect(() => { loadData(); }, []);
 
   const addRoom = async (data) => {
-    try {
+    if (firestoreEnabled) try {
       const ref = await addDoc(collection(db, 'rooms'), data);
       setRooms(prev => [...prev, { id: ref.id, ...data }]);
-    } catch {
-      const id = String(Date.now());
-      setRooms(prev => [...prev, { id, ...data }]);
-    }
+      return;
+    } catch { firestoreEnabled = false; }
+    const id = String(Date.now());
+    setRooms(prev => [...prev, { id, ...data }]);
   };
 
   const updateRoom = async (id, data) => {
-    try {
+    if (firestoreEnabled) try {
       await updateDoc(doc(db, 'rooms', id), data);
-      setRooms(prev => prev.map(r => r.id === id ? { ...r, ...data } : r));
-    } catch {
-      setRooms(prev => prev.map(r => r.id === id ? { ...r, ...data } : r));
-    }
+    } catch { firestoreEnabled = false; }
+    setRooms(prev => prev.map(r => r.id === id ? { ...r, ...data } : r));
   };
 
   const deleteRoom = async (id) => {
-    try { await deleteDoc(doc(db, 'rooms', id)); } catch {}
+    if (firestoreEnabled) try { await deleteDoc(doc(db, 'rooms', id)); } catch { firestoreEnabled = false; }
     setRooms(prev => prev.filter(r => r.id !== id));
   };
 
   const addService = async (data) => {
-    try {
+    if (firestoreEnabled) try {
       const ref = await addDoc(collection(db, 'services'), data);
       setServices(prev => [...prev, { id: ref.id, ...data }]);
-    } catch {
-      const id = String(Date.now());
-      setServices(prev => [...prev, { id, ...data }]);
-    }
+      return;
+    } catch { firestoreEnabled = false; }
+    const id = String(Date.now());
+    setServices(prev => [...prev, { id, ...data }]);
   };
 
   const deleteService = async (id) => {
-    try { await deleteDoc(doc(db, 'services', id)); } catch {}
+    if (firestoreEnabled) try { await deleteDoc(doc(db, 'services', id)); } catch { firestoreEnabled = false; }
     setServices(prev => prev.filter(s => s.id !== id));
   };
 
   const toggleService = async (id, active) => {
-    try { await updateDoc(doc(db, 'services', id), { active }); } catch {}
+    if (firestoreEnabled) try { await updateDoc(doc(db, 'services', id), { active }); } catch { firestoreEnabled = false; }
     setServices(prev => prev.map(s => s.id === id ? { ...s, active } : s));
   };
 
   const updateSettings = async (data) => {
-    try {
+    if (firestoreEnabled) try {
       await setDoc(doc(db, 'settings', 'hotel'), data, { merge: true });
-      setSettings(prev => ({ ...prev, ...data }));
-    } catch {
-      setSettings(prev => ({ ...prev, ...data }));
-    }
+    } catch { firestoreEnabled = false; }
+    setSettings(prev => ({ ...prev, ...data }));
   };
 
   return (
